@@ -13,11 +13,9 @@
   <!-- sessão de login -->
   <section class="login-section bg-dark">
     <div class="login-box">
-      <form action="#" method="POST">
-        <label for="username" >identificação:</label>
-          <input type="text" maxlength="10" required id="username" name="username">
-        <label for="password" required>senha:</label>
-          <input type="password" id="password" name="password">
+      <form action="/src/login.php" method="POST">
+          <input type="text" maxlength="10" required id="username" placeholder="identificação" name="username">
+          <input type="password" required id="password" placeholder="senha" name="password">
         <button class="btn btn-outline-dark" type="submit" name="entrar" value="entrar">entrar</button>
       </form>
     </div>

@@ -87,14 +87,19 @@ html, body {
 
 .login-box input {
   margin: 0 auto;
+  margin-top: 8px;
   border: solid 1px #ccc;
   border-radius: 10px;
+}
+
+.login-box ::placeholder {
+  text-align: center;
 }
 
 .login-section .btn {
   border-color: #ccc;
   border-radius: 10px;
-  margin-top: 12px;
+  margin-top: 8px;
   width: 70px;
   height: auto;
   padding: 5px 10px;
