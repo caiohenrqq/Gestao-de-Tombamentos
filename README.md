@@ -18,21 +18,6 @@ Este é um projeto desenvolvido em PHP que oferece funcionalidades para gerencia
 - MySQL
 - HTML/CSS
 
-## Instalação
-
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/seuusuario/seurepositorio.git
-   ```
-
-2. Configure o banco de dados MySQL:
-   - Crie um banco de dados e configure as credenciais no arquivo `config.php`.
-
-3. Importe o esquema do banco de dados:
-   - Utilize o arquivo `database.sql` para criar as tabelas necessárias.
-
-4. Acesse o projeto em seu navegador para usar o sistema.
-
 ## Contribuição
 
 Sinta-se à vontade para contribuir com melhorias ou correções. Faça um fork do repositório, crie uma branch para suas modificações e envie um pull request com uma descrição clara das alterações.
