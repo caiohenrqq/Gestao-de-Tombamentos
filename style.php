@@ -86,6 +86,7 @@ html, body {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  font-size: 1rem;
   margin: 0 auto;
   width: 12rem;
   height: 2rem;
@@ -141,6 +142,7 @@ html, body {
 
 .cadastrar-box input {
   display: flex;
+  font-size: 1rem;
   flex-direction: column;
   flex-wrap: wrap;
   margin: 0 auto;

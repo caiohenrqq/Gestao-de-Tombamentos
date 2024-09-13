@@ -15,9 +15,10 @@
     <div class="cadastrar-box">
       <form action="/src/autenticacao.php" method="POST">
           <input type="text" maxlength="15" required id="username" placeholder="identificação" name="username">
-          <input type="password" required id="password" placeholder="senha" name="password">
-          <input type="text" required id="email" placeholder="e-mail" name="email">
-        <button class="btn btn-outline-dark" type="submit" name="cadastrar" value="cadastrar">cadastrar</button>
+          <input type="password" required id="senha" placeholder="senha" name="senha">
+          <input type="email" required id="email" placeholder="e-mail" name="email">
+          <button onclick="location.href = '/index.php';" class="btn btn-outline-dark" type="button" name="retornar" value="retornar">retornar</button>
+          <button class="btn btn-outline-dark" type="submit" name="cadastrar" value="cadastrar">cadastrar</button>
       </form>
     </div>
   </section>
