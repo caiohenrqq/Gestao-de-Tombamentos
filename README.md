@@ -17,7 +17,3 @@ Este é um projeto desenvolvido em PHP que oferece funcionalidades para gerencia
 ## Contribuição
 
 Sinta-se à vontade para contribuir com melhorias ou correções. Faça um fork do repositório, crie uma branch para suas modificações e envie um pull request com uma descrição clara das alterações.
-
----
-
-Adapte conforme necessário para refletir os detalhes específicos do seu projeto!
