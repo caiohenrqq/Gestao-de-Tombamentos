@@ -93,6 +93,7 @@ html, body {
   margin-top: 8px;
   border: solid 1px #ccc;
   border-radius: 10px;
+  text-align: center;
 }
 
 .login-box ::placeholder {
@@ -149,6 +150,7 @@ html, body {
   width: 12rem;
   height: 2rem;
   margin-top: 8px;
+  text-align: center;
   border: solid 1px #ccc;
   border-radius: 10px;
 }
