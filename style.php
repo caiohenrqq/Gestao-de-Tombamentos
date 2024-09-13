@@ -60,22 +60,19 @@ html, body {
   justify-content: center;
   align-items: center;
   height: 100vh; /* Garante que ocupe toda a altura da viewport */
-  position: relative; /* Permite o uso de z-index */
-  z-index: 1; /* Z-index menor para ficar atrás da caixa de login */
 }
 
 .login-box {
   font-size: 10px;
   position: relative; /* Ajusta o posicionamento da caixa de login */
-  width: 12rem;
-  height: 10rem;
+  width: 25rem;
+  height: 20rem;
   border-width: 1px;
   border-radius: 8%;
   border-style: solid;
   border-color: #ccc;
   padding: 20px;
   background-color: white; /* Garante que o fundo da caixa de login seja branco e visível */
-  z-index: 2; /* Z-index maior para ficar sobre o plano de fundo */
 
   /* Adicionando flexbox */
   display: flex;
@@ -86,7 +83,12 @@ html, body {
 }
 
 .login-box input {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   margin: 0 auto;
+  width: 12rem;
+  height: 2rem;
   margin-top: 8px;
   border: solid 1px #ccc;
   border-radius: 10px;
@@ -94,14 +96,73 @@ html, body {
 
 .login-box ::placeholder {
   text-align: center;
+  font-size: 1rem;
 }
 
 .login-section .btn {
   border-color: #ccc;
   border-radius: 10px;
   margin-top: 8px;
-  width: 70px;
-  height: auto;
+  width: 9rem;
+  height: 2.5rem;
   padding: 5px 10px;
   font-size: 9px;
+  font-size: 1rem;
+}
+
+/* sessão cadastrar */
+
+.cadastrar-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Garante que ocupe toda a altura da viewport */
+}
+
+.cadastrar-box {
+  font-size: 10px;
+  position: relative; /* Ajusta o posicionamento da caixa de login */
+  width: 25rem;
+  height: 20rem;
+  border-width: 1px;
+  border-radius: 8%;
+  border-style: solid;
+  border-color: #ccc;
+  padding: 20px;
+  background-color: white; /* Garante que o fundo da caixa de login seja branco e visível */
+
+  /* Adicionando flexbox */
+  display: flex;
+  flex-direction: column; /* Organiza os itens em uma coluna */
+  justify-content: center; /* Centraliza verticalmente */
+  align-items: center; /* Centraliza horizontalmente */
+  text-align: center; /* Centraliza o texto dentro dos itens */
+}
+
+.cadastrar-box input {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: 12rem;
+  height: 2rem;
+  margin-top: 8px;
+  border: solid 1px #ccc;
+  border-radius: 10px;
+}
+
+.cadastrar-box ::placeholder {
+  text-align: center;
+  font-size: 1rem;
+}
+
+.cadastrar-section .btn {
+  border-color: #ccc;
+  border-radius: 10px;
+  margin-top: 8px;
+  width: 9rem;
+  height: 2.5rem;
+  padding: 5px 10px;
+  font-size: 9px;
+  font-size: 1rem;
 }

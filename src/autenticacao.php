@@ -5,6 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (isset($_POST['x']) && isset($_POST['y'])) {
     $username;
     $senha;
+    $email;
 
     // chama função entrr se o botão 'entrar' for pressionado
     if (isset($_POST['entrar'])) {
@@ -12,8 +13,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
       echo "erro!";
     }
+
+    if (isset($_POST['entrar'])) {
+      cadastrar($username, $senha);
+    } else {
+      echo "erro!";
+    }
   }
 
   function entrar($username, $senha) {
+
+  }
+  
+  function cadastrar() {
+
   }
 }
