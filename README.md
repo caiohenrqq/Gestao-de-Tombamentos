@@ -1,7 +1,3 @@
-Claro! Aqui está uma descrição que você pode usar para o seu projeto no GitHub:
-
----
-
 # Sistema de Gestão de Tombamentos
 
 Este é um projeto desenvolvido em PHP que oferece funcionalidades para gerenciamento de tombamentos. O sistema inclui um módulo de autenticação com login e cadastro, permitindo que técnicos possam se cadastrar, autenticar e gerenciar os tombamentos de equipamentos de forma eficiente.
@@ -21,7 +17,3 @@ Este é um projeto desenvolvido em PHP que oferece funcionalidades para gerencia
 ## Contribuição
 
 Sinta-se à vontade para contribuir com melhorias ou correções. Faça um fork do repositório, crie uma branch para suas modificações e envie um pull request com uma descrição clara das alterações.
-
----
-
-Adapte conforme necessário para refletir os detalhes específicos do seu projeto!
