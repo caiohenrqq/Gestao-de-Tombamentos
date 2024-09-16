@@ -3,7 +3,7 @@
 include "conexao.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // verifica se os dados foram enviados e não são nulos
+    // verifica se os dados foram enviados e nã o são nulos
     if (isset($_POST['username']) && isset($_POST['senha'])) {
         $username = $_POST['username'];
         $senha = $_POST['senha'];
