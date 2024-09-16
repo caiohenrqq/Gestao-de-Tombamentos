@@ -54,6 +54,13 @@ html, body {
   margin: 0;
 }
 
+/* váriaveis */
+:root { 
+  --corBorda: #ccc;
+  --corBox: #f0f0f0;
+  /* cor do background está em bg-dark, utilizando lib bootstrap */
+}
+
 /* sessão login */
 .login-section {
   display: flex;
@@ -70,9 +77,9 @@ html, body {
   border-width: 1px;
   border-radius: 8%;
   border-style: solid;
-  border-color: #ccc;
+  border-color: var(--corBorda);
   padding: 20px;
-  background-color: white; /* Garante que o fundo da caixa de login seja branco e visível */
+  background-color: var(--corBox); /* Garante que o fundo da caixa de login seja branco e visível */
 
   /* Adicionando flexbox */
   display: flex;
@@ -91,7 +98,7 @@ html, body {
   width: 12rem;
   height: 2rem;
   margin-top: 8px;
-  border: solid 1px #ccc;
+  border: solid 1px var(--corBorda);
   border-radius: 10px;
   text-align: center;
 }
@@ -102,7 +109,7 @@ html, body {
 }
 
 .login-section .btn {
-  border-color: #ccc;
+  border-color: var(--corBorda);
   border-radius: 10px;
   margin-top: 8px;
   width: 9rem;
@@ -118,7 +125,7 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Garante que ocupe toda a altura da viewport */
+  height: 100vh; 
 }
 
 .cadastrar-box {
@@ -129,9 +136,9 @@ html, body {
   border-width: 1px;
   border-radius: 8%;
   border-style: solid;
-  border-color: #ccc;
+  border-color: var(--corBorda);
   padding: 20px;
-  background-color: white; /* Garante que o fundo da caixa de login seja branco e visível */
+  background-color: var(--corBox);
 
   /* Adicionando flexbox */
   display: flex;
@@ -151,7 +158,7 @@ html, body {
   height: 2rem;
   margin-top: 8px;
   text-align: center;
-  border: solid 1px #ccc;
+  border: solid 1px var(--corBorda);
   border-radius: 10px;
 }
 
@@ -170,3 +177,52 @@ html, body {
   font-size: 9px;
   font-size: 1rem;
 }
+
+/* sessão painel.php */
+
+.painel-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.bem-vindo {
+  font-size: 1.5rem;
+  position: relative;
+  width: 50rem;
+  height: 40rem;
+  border-width: 1px;
+  border-radius: 8%;
+  border-style: solid;
+  border-color: var(--corBorda);
+  padding: 20px;
+  background-color: var(--corBox);
+  gap: 1rem;
+
+  /* flexbox */
+  display: flex;
+  flex-direction: column; /* organiza os itens em uma coluna */
+  justify-content: flex-start; /* centraliza no meio */
+  align-items: center; /* centraliza horizontalmente */
+  text-align: center; /* alinha o texto ao centro */
+}
+
+.icon {
+  width: 20px;
+  height: 20px; 
+}
+
+.logout {
+  align-self: flex-end; 
+  margin-top: auto;
+}
+
+.linhaMaiorIndependente {
+  width: 46rem;
+}
+
+.linha {
+  width: 46rem;
+}
+
