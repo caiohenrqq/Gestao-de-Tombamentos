@@ -25,6 +25,7 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
@@ -226,3 +227,8 @@ html, body {
   width: 46rem;
 }
 
+/* sessão tabela */
+
+.table {
+  font-size: 16px;
+}

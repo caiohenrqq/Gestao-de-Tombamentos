@@ -1,5 +1,8 @@
 <?php
 include('src\protecao.php');
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -15,9 +18,55 @@ include('src\protecao.php');
 <body>
   <section class="painel-section bg-dark">   
     <div class="bem-vindo">
-      <div>bem vindo ao painel de tombamentos, <?php echo $_SESSION['username'];?>.
+      <div>bem-vindo ao painel de tombamentos, <?php echo $_SESSION['username'];?>.
       <hr class="linhaMaiorIndependente">
     </div>
+
+     <!-- tabela -->
+     <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Secretaria</th>
+          <th scope="col">Técnico</th>
+          <th scope="col">Entrada</th>
+          <th scope="col">Saída</th>
+          <th scope="col">Prioridade</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <tr>
+          <th scope="row">1</th>
+          <td>Secretaria</td>
+          <td>Técnico</td>
+          <td>Entrada</td>
+          <td>Saída</td>
+          <td>Prioridade</td>
+          <td>Status</td>
+        </tr>
+
+        <tr>
+          <th scope="row">2</th>
+          <td>Secretaria</td>
+          <td>Técnico</td>
+          <td>Entrada</td>
+          <td>Saída</td>
+          <td>Prioridade</td>
+          <td>Status</td>
+        </tr>
+
+        <tr>
+          <th scope="row">3</th>
+          <td>Secretaria</td>
+          <td>Técnico</td>
+          <td>Entrada</td>
+          <td>Saída</td>
+          <td>Prioridade</td>
+          <td>Status</td>
+        </tr>
+      </tbody>
+    </table>
       <!-- logout -->
       <div class="logout">
         <a href="../src/logout.php">
