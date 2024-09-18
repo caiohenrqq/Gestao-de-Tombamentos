@@ -1,5 +1,8 @@
 <?php
 include('src\protecao.php');
+include('src\conexao.php');
+
+
 
 
 
@@ -67,11 +70,26 @@ include('src\protecao.php');
         </tr>
       </tbody>
     </table>
-      <!-- logout -->
-      <div class="logout">
-        <a href="../src/logout.php">
-          <img class="icon" src="/icons/logout.svg" alt="deslogar">
-        </a>
+      <!-- logout, add e refresh -->
+      <div class="icons">
+        <div class="add">
+          <a href="../src/logout.php">
+            <img class="icon" src="/icons/add.svg" alt="adicionar">
+          </a>
+        </div>
+
+        <div class="refresh">
+          <a href="../src/logout.php">
+            <img class="icon" src="/icons/refresh.svg" alt="atualizar">
+          </a>
+        </div>
+
+        <div class="logout">
+          <a href="../src/logout.php">
+            <img class="icon" src="/icons/logout.svg" alt="deslogar">
+          </a>
+        </div>
+        
       </div>
       <hr class="linha">
     </div>

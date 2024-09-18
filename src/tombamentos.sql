@@ -14,7 +14,7 @@ ADD COLUMN senha varchar(255) not null;
 SELECT * FROM tecnicos;
 
 CREATE TABLE tombamentos (
-  tombamento_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  tombamento_id INT UNSIGNED NOT NULL,
   secretaria VARCHAR(50) NOT NULL,
   tecnico VARCHAR(50) NOT NULL,
   entrada DATETIME NOT NULL,

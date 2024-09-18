@@ -209,14 +209,15 @@ html, body {
   text-align: center; /* alinha o texto ao centro */
 }
 
+.icons { 
+  align-self: flex-end; 
+  margin-top: auto;
+}
+
 .icon {
   width: 20px;
   height: 20px; 
-}
-
-.logout {
-  align-self: flex-end; 
-  margin-top: auto;
+  margin-left: auto;
 }
 
 .linhaMaiorIndependente {
