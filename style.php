@@ -239,9 +239,11 @@ html, body {
 }
 
 .janelaCadastrarAtivo {
-  display: inline;
+  font-size: 14px;
   position: absolute;
   width: 40rem;
+  text-align: left;
+
   z-index: 1000;
   height: 37.5rem;
   border-width: 1px;
@@ -251,25 +253,18 @@ html, body {
   padding: 20px;
   background-color: var(--corBox);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
-  /* Adicionando flexbox */
-  display: flex;
-  flex-direction: column; /* Organiza os itens em uma coluna */
-  justify-content: center; /* Centraliza verticalmente */
-  align-items: center; /* Centraliza horizontalmente */
-  text-align: center; /* Centraliza o texto dentro dos itens */
 }
 
 .janelaCadastrarAtivo input {
-  display: flex;
   font-size: 1rem;
-  flex-direction: column;
-  flex-wrap: wrap;
-  margin: 0 auto;
-  width: 12rem;
-  height: 2rem;
-  margin-top: 8px;
-  text-align: center;
+  width: 100%;
+  margin: 1px 0 12px 0;
   border: solid 1px var(--corBorda);
   border-radius: 10px;
 }
+
+.btns {
+  text-align: center;
+}
+
+
