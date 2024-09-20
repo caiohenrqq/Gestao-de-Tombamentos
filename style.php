@@ -369,3 +369,4 @@ body {
 .btns {
   text-align: center;
 }
+

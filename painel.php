@@ -29,6 +29,8 @@ function remover() {
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>    
   </head>
   <body>
     <section class="painel-section bg-dark">
@@ -109,17 +111,19 @@ function remover() {
               <input type="text" id="..." name="..." />
             </div>
             <div class="campoEntrada">
-              <label for="">Entrada</label>
+              <label for="">Entrada (DD-MM-YYYY)</label>
               <input class="dataHora" type="datetime-local" id="dataHora" name="dataHora" />
             </div>
+
             <div class="campoEntrada">
-              <label for="">Prioridade</label>
-              <select name="" id="">
-                <option value="">máxima</option>
-                <option value=""></option>
-                <option value=""></option>
+              <label for="">Prioridade:</label>
+              <select id="my-single-select" multiple>
+                <option value="1">Miníma</option>
+                <option value="2">Moderada</option>
+                <option value="3">Máxima</option>
               </select>
             </div>
+
             <div class="campoEntrada">
               <label for="">Descrição</label>
               <input placeholder="Computador Lenovo com problema no HD..." type="text" id="..." name="..." />
@@ -146,33 +150,42 @@ function remover() {
         <hr class="linha" />
       </div>
     </section>
-  </body>
-  <script>
-    var dataHora  = document.querySelector(".dataHora");   
-
-    function dataHoraAtual() {
-          const data = new Date();
-          const ano = data.getFullYear();
-          const mes = String(data.getMonth() + 1).padStart(2, '0');
-          const dia = String(data.getDate()).padStart(2, '0');
-          const horas = String(data.getHours()).padStart(2, '0');
-          const minutos = String(data.getMinutes()).padStart(2, '0');
+    <script>
+      var dataHora  = document.querySelector(".dataHora");   
       
-          return `${ano}-${mes}-${dia}T${horas}:${minutos}`;
+      const element = document.getElementById('my-single-select'); // Choices.js
+      const choices = new Choices(element, {
+        removeItemButton: true,
+        placeholderValue: "Escolha a prioridade",
+        addItemText: (value) => `Você só pode selecionar "${value}"`,  // Personaliza a mensagem
+        maxItemText: () => 'Apenas uma opção pode ser selecionada!',
+        maxItemCount: 1,
+        shouldSort: false,
+      });
+      function dataHoraAtual() {
+            const data = new Date();
+            const ano = data.getFullYear();
+            const mes = String(data.getMonth() + 1).padStart(2, '0');
+            const dia = String(data.getDate()).padStart(2, '0');
+            const horas = String(data.getHours()).padStart(2, '0');
+            const minutos = String(data.getMinutes()).padStart(2, '0');
+        
+            return `${ano}-${mes}-${dia}T${horas}:${minutos}`;
+          }
+  
+      function cadastrar() {
+        let janelaCadastrar = document.querySelector(".janelaCadastrar"); // pega elemento janelaCadastrar
+        
+        dataHora.value = dataHoraAtual();
+        // se janelaCadastrar for TRUE, isto é, se ela existir, utiliza o elemento toggle para alternar entre ativo e desabilitado.
+        if (janelaCadastrar) {
+        janelaCadastrar.classList.toggle("janelaCadastrar"); // on
+        janelaCadastrar.classList.toggle("janelaCadastrarAtivo"); // off
+        
+        } else {
+          console.error("janelaCadastrar não encontrada.")
         }
-
-    function cadastrar() {
-      let janelaCadastrar = document.querySelector(".janelaCadastrar"); // pega elemento janelaCadastrar
-      
-      dataHora.value = dataHoraAtual();
-      // se janelaCadastrar for TRUE, isto é, se ela existir, utiliza o elemento toggle para alternar entre ativo e desabilitado.
-      if (janelaCadastrar) {
-      janelaCadastrar.classList.toggle("janelaCadastrar"); // on
-      janelaCadastrar.classList.toggle("janelaCadastrarAtivo"); // off
-      
-      } else {
-        console.error("janelaCadastrar não encontrada.")
       }
-    }
-  </script>
+    </script>
+  </body>
 </html>
