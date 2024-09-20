@@ -233,3 +233,43 @@ html, body {
 .table {
   font-size: 16px;
 }
+
+.janelaCadastrar {
+  display: none;
+}
+
+.janelaCadastrarAtivo {
+  display: inline;
+  position: absolute;
+  width: 40rem;
+  z-index: 1000;
+  height: 37.5rem;
+  border-width: 1px;
+  border-radius: 8%;
+  border-style: solid;
+  border-color: var(--corBorda);
+  padding: 20px;
+  background-color: var(--corBox);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  /* Adicionando flexbox */
+  display: flex;
+  flex-direction: column; /* Organiza os itens em uma coluna */
+  justify-content: center; /* Centraliza verticalmente */
+  align-items: center; /* Centraliza horizontalmente */
+  text-align: center; /* Centraliza o texto dentro dos itens */
+}
+
+.janelaCadastrarAtivo input {
+  display: flex;
+  font-size: 1rem;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: 12rem;
+  height: 2rem;
+  margin-top: 8px;
+  text-align: center;
+  border: solid 1px var(--corBorda);
+  border-radius: 10px;
+}

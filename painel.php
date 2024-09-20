@@ -2,9 +2,16 @@
 include('src\protecao.php');
 include('src\conexao.php');
 
+function adicionar() {
+}
 
+function atualizar() {
 
+}
 
+function remover() {
+
+}
 
 ?>
 
@@ -48,32 +55,12 @@ include('src\conexao.php');
           <td>Prioridade</td>
           <td>Status</td>
         </tr>
-
-        <tr>
-          <th scope="row">2</th>
-          <td>Secretaria</td>
-          <td>Técnico</td>
-          <td>Entrada</td>
-          <td>Saída</td>
-          <td>Prioridade</td>
-          <td>Status</td>
-        </tr>
-
-        <tr>
-          <th scope="row">3</th>
-          <td>Secretaria</td>
-          <td>Técnico</td>
-          <td>Entrada</td>
-          <td>Saída</td>
-          <td>Prioridade</td>
-          <td>Status</td>
-        </tr>
       </tbody>
     </table>
       <!-- logout, add e refresh -->
       <div class="icons">
-        <div class="add">
-          <a href="../src/logout.php">
+        <div class="cadastrar">
+          <a href="javascript:void(0);" onclick="cadastrar()">
             <img class="icon" src="/icons/add.svg" alt="adicionar">
           </a>
         </div>
@@ -81,6 +68,12 @@ include('src\conexao.php');
         <div class="refresh">
           <a href="../src/logout.php">
             <img class="icon" src="/icons/refresh.svg" alt="atualizar">
+          </a>
+        </div>
+        
+        <div class="remover">
+          <a href="../src/logout.php">
+            <img class="icon" src="/icons/remove.svg" alt="remover">
           </a>
         </div>
 
@@ -91,8 +84,43 @@ include('src\conexao.php');
         </div>
         
       </div>
+
+      <!-- sessão adicionar -->
+
+      <!-- nesta sessão, irá aparecer uma caixa que possibilitará a inserção de tombamentos -->
+       <div class="janelaCadastrarAtivo" id="janelaCadastrar">
+        <form action="..." method="POST">
+        <label for=""></label>
+        <input type="text" id="..." name="...">
+        
+        <label for=""></label>
+        <input type="text" id="..." name="...">
+
+        <button type="submit" onclick="cadastrar()" class="btn btn-outline-dark" name="cadastrar" value="cadastrar">cadastrar</button>
+        <button class="btn btn-outline-dark">
+          retornar
+          <!-- esse botão irá fazer desaparecer a caixa de criação de novos tombamentos -->
+
+        </button>
+        </form>
+       </div> 
+
       <hr class="linha">
     </div>
   </section>
+
+
 </body>
+<script>
+  function cadastrar() {
+    let janelaCadastrar = document.querySelector('.janelaCadastrar'); // pega elemento janelaCadastrar
+
+    if (janelaCadastrar) {  // se janelaCadastrar for TRUE, ou seja, se existir, então executa:
+      janelaCadastrar.classList.remove('janelaCadastrar');
+      janelaCadastrar.classList.add('janelaCadastrarAtivo');
+    } else {
+      console.log('Elemento não encontrado');
+    }
+  }
+</script>
 </html>
