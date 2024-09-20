@@ -5,58 +5,145 @@ header("Content-type: text/css");
 ?>
 
 /* Reset CSS */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
 }
 
-html, body {
-  height: 100%; 
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+html,
+body {
+  height: 100%;
   margin: 0;
 }
 
 /* váriaveis */
-:root { 
+:root {
   --corBorda: #ccc;
   --corBox: #f0f0f0;
   /* cor do background está em bg-dark, utilizando lib bootstrap */
@@ -67,12 +154,14 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Garante que ocupe toda a altura da viewport */
+  height: 100vh;
+  /* Garante que ocupe toda a altura da viewport */
 }
 
 .login-box {
   font-size: 10px;
-  position: relative; /* Ajusta o posicionamento da caixa de login */
+  position: relative;
+  /* Ajusta o posicionamento da caixa de login */
   width: 25rem;
   height: 20rem;
   border-width: 1px;
@@ -80,14 +169,19 @@ html, body {
   border-style: solid;
   border-color: var(--corBorda);
   padding: 20px;
-  background-color: var(--corBox); /* Garante que o fundo da caixa de login seja branco e visível */
+  background-color: var(--corBox);
+  /* Garante que o fundo da caixa de login seja branco e visível */
 
   /* Adicionando flexbox */
   display: flex;
-  flex-direction: column; /* Organiza os itens em uma coluna */
-  justify-content: center; /* Centraliza verticalmente */
-  align-items: center; /* Centraliza horizontalmente */
-  text-align: center; /* Centraliza o texto dentro dos itens */
+  flex-direction: column;
+  /* Organiza os itens em uma coluna */
+  justify-content: center;
+  /* Centraliza verticalmente */
+  align-items: center;
+  /* Centraliza horizontalmente */
+  text-align: center;
+  /* Centraliza o texto dentro dos itens */
 }
 
 .login-box input {
@@ -126,12 +220,13 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; 
+  height: 100vh;
 }
 
 .cadastrar-box {
   font-size: 10px;
-  position: relative; /* Ajusta o posicionamento da caixa de login */
+  position: relative;
+  /* Ajusta o posicionamento da caixa de login */
   width: 25rem;
   height: 20rem;
   border-width: 1px;
@@ -143,10 +238,14 @@ html, body {
 
   /* Adicionando flexbox */
   display: flex;
-  flex-direction: column; /* Organiza os itens em uma coluna */
-  justify-content: center; /* Centraliza verticalmente */
-  align-items: center; /* Centraliza horizontalmente */
-  text-align: center; /* Centraliza o texto dentro dos itens */
+  flex-direction: column;
+  /* Organiza os itens em uma coluna */
+  justify-content: center;
+  /* Centraliza verticalmente */
+  align-items: center;
+  /* Centraliza horizontalmente */
+  text-align: center;
+  /* Centraliza o texto dentro dos itens */
 }
 
 .cadastrar-box input {
@@ -203,20 +302,24 @@ html, body {
 
   /* flexbox */
   display: flex;
-  flex-direction: column; /* organiza os itens em uma coluna */
-  justify-content: flex-start; /* centraliza no meio */
-  align-items: center; /* centraliza horizontalmente */
-  text-align: center; /* alinha o texto ao centro */
+  flex-direction: column;
+  /* organiza os itens em uma coluna */
+  justify-content: flex-start;
+  /* centraliza no meio */
+  align-items: center;
+  /* centraliza horizontalmente */
+  text-align: center;
+  /* alinha o texto ao centro */
 }
 
-.icons { 
-  align-self: flex-end; 
+.icons {
+  align-self: flex-end;
   margin-top: auto;
 }
 
 .icon {
   width: 20px;
-  height: 20px; 
+  height: 20px;
   margin-left: auto;
 }
 
@@ -266,5 +369,3 @@ html, body {
 .btns {
   text-align: center;
 }
-
-

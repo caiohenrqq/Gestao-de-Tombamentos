@@ -110,21 +110,16 @@ function remover() {
             </div>
             <div class="campoEntrada">
               <label for="">Entrada</label>
-              <input type="text" id="..." name="..." />
-            </div>
-            <div class="campoEntrada">
-              <label for="">Saída</label>
-              <input type="text" id="..." name="..." />
+              <input class="dataHora" type="datetime-local" id="dataHora" name="dataHora" />
             </div>
             <div class="campoEntrada">
               <label for="">Prioridade</label>
-              <input type="text" id="..." name="..." />
+              <select name="" id="">
+                <option value="">máxima</option>
+                <option value=""></option>
+                <option value=""></option>
+              </select>
             </div>
-            <div class="campoEntrada">
-              <label for="">Status</label>
-              <input type="text" id="..." name="..." />
-            </div>
-
             <div class="campoEntrada">
               <label for="">Descrição</label>
               <input placeholder="Computador Lenovo com problema no HD..." type="text" id="..." name="..." />
@@ -153,12 +148,28 @@ function remover() {
     </section>
   </body>
   <script>
+    var dataHora  = document.querySelector(".dataHora");   
+
+    function dataHoraAtual() {
+          const data = new Date();
+          const ano = data.getFullYear();
+          const mes = String(data.getMonth() + 1).padStart(2, '0');
+          const dia = String(data.getDate()).padStart(2, '0');
+          const horas = String(data.getHours()).padStart(2, '0');
+          const minutos = String(data.getMinutes()).padStart(2, '0');
+      
+          return `${ano}-${mes}-${dia}T${horas}:${minutos}`;
+        }
+
     function cadastrar() {
       let janelaCadastrar = document.querySelector(".janelaCadastrar"); // pega elemento janelaCadastrar
-
+      
+      dataHora.value = dataHoraAtual();
+      // se janelaCadastrar for TRUE, isto é, se ela existir, utiliza o elemento toggle para alternar entre ativo e desabilitado.
       if (janelaCadastrar) {
-      janelaCadastrar.classList.toggle("janelaCadastrar");
-      janelaCadastrar.classList.toggle("janelaCadastrarAtivo");
+      janelaCadastrar.classList.toggle("janelaCadastrar"); // on
+      janelaCadastrar.classList.toggle("janelaCadastrarAtivo"); // off
+      
       } else {
         console.error("janelaCadastrar não encontrada.")
       }
