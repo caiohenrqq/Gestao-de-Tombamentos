@@ -156,7 +156,7 @@ function remover() {
       const element = document.getElementById('my-single-select'); // Choices.js
       const choices = new Choices(element, {
         removeItemButton: true,
-        placeholderValue: "Escolha a prioridade",
+        placeholderValue: "Priodade",
         addItemText: (value) => `Você só pode selecionar "${value}"`,  // Personaliza a mensagem
         maxItemText: () => 'Apenas uma opção pode ser selecionada!',
         maxItemCount: 1,
