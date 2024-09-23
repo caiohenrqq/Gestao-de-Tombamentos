@@ -3,8 +3,22 @@ include('/protecao.php');
 include "../config/conexao.php";
 
 function adicionar() {
-  
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // verifica se os dados foram enviados e não são nulos
+    if (isset($_POST['id']) && isset($_POST['secretaria']) && isset($_POST['tecnico']) && isset($_POST['entrada']) && isset($_POST['prioridade']) && isset($_POST['descricao'])) {
+        $username = $_POST['username'];
+        $senha = $_POST['senha'];
+
+        // chama a função 'adicionar' se o botão 'adicionar' for pressionado
+        if (isset($_POST['adicionar'])) {
+            cadastrar($username, $senha, $_POST['email']);
+        }
+    } else {
+        echo "dados incompletos!";
+    }
 }
+}
+
 ?>
 
 <!DOCTYPE html>
