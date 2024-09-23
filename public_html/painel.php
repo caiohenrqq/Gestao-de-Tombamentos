@@ -1,6 +1,6 @@
 <?php
-include('protecao.php');
-include('conexao.php');
+include('/protecao.php');
+include "../config/conexao.php";
 ?>
 
 <!DOCTYPE html>

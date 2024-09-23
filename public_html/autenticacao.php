@@ -1,6 +1,5 @@
 <?php
-
-include "conexao.php";
+include "../config/conexao.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // verifica se os dados foram enviados e não são nulos
