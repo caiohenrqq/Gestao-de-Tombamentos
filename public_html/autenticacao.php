@@ -44,7 +44,7 @@ function entrar($username, $senha) {
         $_SESSION['id'] = $usuario['id'];
         $_SESSION['username'] = $usuario['nome'];
 
-        header("Location: ../public_html/painel.php");
+        header("Location: /painel.php");
     } else {
         echo "Erro ao logar, id do técnico ou senha incorretos.";
     }
