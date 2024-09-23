@@ -1,6 +1,10 @@
 <?php
 include('/protecao.php');
 include "../config/conexao.php";
+
+function adicionar() {
+  
+}
 ?>
 
 <!DOCTYPE html>
