@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.php">
+  <link rel="stylesheet" href="assets/css/style.php">
   <title>tombamentos | cadastro</title>
   <link rel="preconnect" href="https://rsms.me/">
   <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
@@ -13,7 +13,7 @@
   <!-- sessão de login -->
   <section class="cadastrar-section bg-dark">
     <div class="cadastrar-box">
-      <form action="/src/autenticacao.php" method="POST">
+      <form action="../config/autenticacao.php" method="POST">
           <input type="text" maxlength="15" required id="username" placeholder="identificação" name="username">
           <input type="password" required id="senha" placeholder="senha" name="senha">
           <input type="email" required id="email" placeholder="e-mail" name="email">

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.php">
+  <link rel="stylesheet" href="assets/css/style.php">
   <title>tombamentos | login</title>
   <link rel="preconnect" href="https://rsms.me/">
   <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
@@ -13,7 +13,7 @@
   <!-- sessão de login -->
   <section class="login-section bg-dark">
     <div class="login-box">
-      <form action="/src/autenticacao.php" method="POST">
+      <form action="../config/autenticacao.php" method="POST">
           <input type="text" maxlength="10" required id="username" placeholder="identificação" name="username">
           <input type="password" required id="senha" placeholder="senha" name="senha">
         <button class="btn btn-outline-dark" type="submit" name="entrar" value="entrar">entrar</button>

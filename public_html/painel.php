@@ -21,7 +21,7 @@ function remover() {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>tombamentos | painel</title>
-    <link rel="stylesheet" href="style.php" />
+    <link rel="stylesheet" href="assets/css/style.php" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -57,12 +57,12 @@ function remover() {
           <tbody class="table-group-divider">
             <tr>
               <th scope="row">1</th>
-              <td>Secretaria</td>
-              <td>Técnico</td>
-              <td>Entrada</td>
-              <td>Saída</td>
-              <td>Prioridade</td>
-              <td>Status</td>
+              <td>---</td>
+              <td>---</td>
+              <td>---</td>
+              <td>---</td>
+              <td>---</td>
+              <td>---</td>
             </tr>
           </tbody>
         </table>
