@@ -13,7 +13,7 @@
   <!-- sessão de login -->
   <section class="login-section bg-dark">
     <div class="login-box">
-      <form action="../config/autenticacao.php" method="POST">
+      <form action="/autenticacao.php" method="POST">
           <input type="text" maxlength="10" required id="username" placeholder="identificação" name="username">
           <input type="password" required id="senha" placeholder="senha" name="senha">
         <button class="btn btn-outline-dark" type="submit" name="entrar" value="entrar">entrar</button>

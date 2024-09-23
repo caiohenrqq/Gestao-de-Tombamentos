@@ -1,18 +1,6 @@
 <?php
-include('src\protecao.php');
-include('src\conexao.php');
-
-function adicionar() {
-}
-
-function atualizar() {
-
-}
-
-function remover() {
-
-}
-
+include('protecao.php');
+include('conexao.php');
 ?>
 
 <!DOCTYPE html>
