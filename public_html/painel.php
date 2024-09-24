@@ -128,8 +128,6 @@ include "../config/conexao.php";
         <hr class="linha" />
       </div>
     </section>
-
-    <!-- crud tombamentos -->
     <script>
       // exibir dados json dos tombamentos
       function exibirDadosTombamento() {
@@ -187,19 +185,22 @@ include "../config/conexao.php";
             return `${ano}-${mes}-${dia}T${horas}:${minutos}`;
           }
 
-      function cadastrar() {
-        let janelaCadastrar = document.querySelector(".janelaCadastrar"); // pega elemento janelaCadastrar
-        
-        dataHora.value = dataHoraAtual();
-        // se janelaCadastrar for TRUE, isto é, se ela existir, utiliza o elemento toggle para alternar entre ativo e desabilitado.
-        if (janelaCadastrar) {
-        janelaCadastrar.classList.toggle("janelaCadastrar"); // on
-        janelaCadastrar.classList.toggle("janelaCadastrarAtivo"); // off
-        
-        } else {
-          console.error("janelaCadastrar não encontrada.")
-        }
+          function cadastrar() {
+    // Pega o elemento da janela de cadastro
+    let janelaCadastrar = document.querySelector(".janelaCadastrar");
+    
+    // Define o valor da data e hora atual
+    dataHora.value = dataHoraAtual(); // Certifique-se de que dataHora é um elemento de entrada válido
+
+    // Verifica se a janelaCadastrar existe
+    if (janelaCadastrar) {
+          // Alterna a classe para mostrar ou esconder a janela
+          janelaCadastrar.classList.toggle("janelaCadastrarAtivo"); // Torna a janela visível ou oculta
+          janelaCadastrar.classList.toggle("janelaCadastrar"); // Alterna a classe principal
+      } else {
+          console.error("janelaCadastrar não encontrada.");
       }
+  }
     </script>
   </body>
 </html>
