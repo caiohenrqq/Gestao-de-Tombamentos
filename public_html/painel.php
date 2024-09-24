@@ -116,14 +116,16 @@ include "../config/conexao.php";
               type="submit"
               name="cadastrarTombamento"
               value="Cadastrar"
+              id="cadastrar"
               class="btn btn-outline-dark"
               onclick="cadastrar()" />
               <input
-              type="submit"
+              type="button"
               name="cadastrarTombamento"
               value="Retornar"
+              id="retornar"
               class="btn btn-outline-dark"
-              onclick="cadastrar()" />
+              onclick="retornar()" />
           </div>
         </form>
       </div>
@@ -153,20 +155,30 @@ include "../config/conexao.php";
 
       return `${ano}-${mes}-${dia}T${horas}:${minutos}`;
     }
+    var janelaCadastrar = document.getElementById("janelaCadastrar"); // pega elemento janelaCadastrar
 
     function cadastrar() {
-      let janelaCadastrar = document.querySelector(".janelaCadastrar"); // pega elemento janelaCadastrar
-
       dataHora.value = dataHoraAtual();
-      // se janelaCadastrar for TRUE, isto é, se ela existir, utiliza o elemento toggle para alternar entre ativo e desabilitado.
-      if (janelaCadastrar) {
-        janelaCadastrar.classList.toggle("janelaCadastrar"); // on
-        janelaCadastrar.classList.toggle("janelaCadastrarAtivo"); // off
 
+      // se janelaCadastrar for TRUE, isto é, se ela existir, utiliza o elemento toggle para alternar entre ativo e desabilitado.
+        janelaCadastrar.classList.toggle("janelaCadastrar"); // off
+        janelaCadastrar.classList.toggle("janelaCadastrarAtivo"); // on
+
+      if (janelaCadastrar.classList.contains("janelaCadastrarAtivo")) {
+        console.log("caraca mlk");
       } else {
-        console.error("janelaCadastrar não encontrada.")
+        console.log("pica");
       }
     }
+
+    function retornar() {
+      janelaCadastrar.classList.remove("janelaCadastrarAtivo");
+      janelaCadastrar.classList.add("janelaCadastrar");
+    }
+
+      // Associa as funções aos botões
+    document.getElementById("cadastrar").addEventListener("click", cadastrar);
+    document.getElementById("retornar").addEventListener("click", retornar);
   </script>
 </body>
 
