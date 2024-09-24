@@ -62,13 +62,13 @@ include "../config/conexao.php";
         </div>
 
         <div class="remover">
-          <a href="../src/logout.php">
+          <a href="/logout.php">
             <img class="icon" src="/icons/remove.svg" alt="remover" />
           </a>
         </div>
 
         <div class="logout">
-          <a href="../src/logout.php">
+          <a href="/logout.php">
             <img class="icon" src="/icons/logout.svg" alt="deslogar" />
           </a>
         </div>
