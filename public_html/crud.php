@@ -50,5 +50,23 @@ function cadastrarTombamento() {
 }
 
 function exibirTombamentos() {
+  global $conexao;
 
+  $sql = "SELECT id, secretaria, tecnico, dataHora, prioridade, descricao FROM tombamentos";
+  $resultado = $conexao->query($sql);
+
+  $dadosTombamentos = [];
+
+  if ($resultado->num_rows > 0) {
+    // coloca cada linha de tombamentos do sql no array dadosTombamentos. 
+    while($row = $resultado->fetch_assoc()) {
+      $dadosTombamentos[] = $row;
+    }
+  }
+
+  // transforma dadosTombamentos em formato JSON
+  header('Content-Type: application/json');
+  echo json_encode($dadosTombamentos);
+
+  $conexao->close();
 }

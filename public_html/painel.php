@@ -42,16 +42,8 @@ include "../config/conexao.php";
               <th scope="col">Status</th>
             </tr>
           </thead>
-          <tbody class="table-group-divider">
-            <tr>
-              <th scope="row">1</th>
-              <td>---</td>
-              <td>---</td>
-              <td>---</td>
-              <td>---</td>
-              <td>---</td>
-              <td>---</td>
-            </tr>
+          <tbody id="tabela" class="table-group-divider">
+            <!-- Os dados serão inseridos aqui pelo JavaScript -->
           </tbody>
         </table>
         <!-- logout, add e refresh -->
