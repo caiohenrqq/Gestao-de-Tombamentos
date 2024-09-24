@@ -1,24 +1,6 @@
 <?php
 include('/protecao.php');
 include "../config/conexao.php";
-
-function adicionar() {
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // verifica se os dados foram enviados e não são nulos
-    if (isset($_POST['id']) && isset($_POST['secretaria']) && isset($_POST['tecnico']) && isset($_POST['entrada']) && isset($_POST['prioridade']) && isset($_POST['descricao'])) {
-        $username = $_POST['username'];
-        $senha = $_POST['senha'];
-
-        // chama a função 'adicionar' se o botão 'adicionar' for pressionado
-        if (isset($_POST['adicionar'])) {
-            cadastrar($username, $senha, $_POST['email']);
-        }
-    } else {
-        echo "dados incompletos!";
-    }
-}
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -103,48 +85,46 @@ function adicionar() {
 
         <!-- nesta sessão, irá aparecer uma caixa que possibilitará a inserção de tombamentos -->
         <div class="janelaCadastrar" id="janelaCadastrar">
-          <form action="" method="POST">
+          <form action="/crud.php" method="POST">
             <div class="campoEntrada">
-              <label for="">ID</label>
-              <input type="text" id="..." name="..." />
+              <label for="id">ID</label>
+              <input type="text" id="id" name="id" />
             </div>
             <div class="campoEntrada">
-              <label for="">Secretaria</label>
-              <input placeholder="SEMURFH, SEMAD..." type="text" id="..." name="..." />
+              <label for="secretaria">Secretaria</label>
+              <input placeholder="SEMURFH, SEMAD..." type="text" id="secretaria" name="secretaria" />
             </div>
             <div class="campoEntrada">
-              <label for="">Técnico</label>
-              <input type="text" id="..." name="..." />
+              <label for="tecnico">Técnico</label>
+              <input type="text" id="tecnico" name="tecnico" />
             </div>
             <div class="campoEntrada">
-              <label for="">Entrada (DD-MM-YYYY)</label>
+              <label for="dataHora">Entrada (DD-MM-YYYY)</label>
               <input class="dataHora" type="datetime-local" id="dataHora" name="dataHora" />
             </div>
 
             <div class="campoEntrada">
-              <label for="">Prioridade:</label>
+              <label for="prioridade">Prioridade:</label>
               <select id="my-single-select" multiple>
-                <option value="1">Miníma</option>
-                <option value="2">Moderada</option>
-                <option value="3">Máxima</option>
+                <option value="minima">Miníma</option>
+                <option value="moderada">Moderada</option>
+                <option value="maxima">Máxima</option>
               </select>
             </div>
 
             <div class="campoEntrada">
-              <label for="">Descrição</label>
-              <input placeholder="Computador Lenovo com problema no HD..." type="text" id="..." name="..." />
+              <label for="descricao">Descrição</label>
+              <input placeholder="Computador Lenovo com problema no HD..." type="text" id="descricao" name="descricao" />
             </div>
             
             <div class="btns">
-              <button
+              <input
                 type="submit"
-                onclick="cadastrar()"
+                name="cadastrarTombamento"
+                value="Cadastrar"
                 class="btn btn-outline-dark"
-                name="cadastrar"
-                value="cadastrar"
-              >
-                cadastrar
-              </button>
+                onclick="cadastrar()"
+              />
               <button onclick="cadastrar()" class="btn btn-outline-dark">
                 retornar
                 <!-- esse botão irá fazer desaparecer a caixa de criação de novos tombamentos -->
@@ -156,6 +136,8 @@ function adicionar() {
         <hr class="linha" />
       </div>
     </section>
+
+    <!-- crud tombamentos -->
     <script>
       var dataHora  = document.querySelector(".dataHora");   
       
@@ -168,6 +150,7 @@ function adicionar() {
         maxItemCount: 1,
         shouldSort: false,
       });
+
       function dataHoraAtual() {
             const data = new Date();
             const ano = data.getFullYear();
@@ -178,7 +161,7 @@ function adicionar() {
         
             return `${ano}-${mes}-${dia}T${horas}:${minutos}`;
           }
-  
+
       function cadastrar() {
         let janelaCadastrar = document.querySelector(".janelaCadastrar"); // pega elemento janelaCadastrar
         
