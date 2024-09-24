@@ -151,9 +151,8 @@ include "../config/conexao.php";
             })
           }
         })
+        document.addEventListener('DOMContentLoaded', exibirDadosTombamento);
     }
-
-    document.addEventListener('DOMContentLoaded', exibirDadosTombamento);
 
     var dataHora = document.querySelector(".dataHora");
     const element = document.getElementById('my-single-select'); // Choices.js
@@ -181,20 +180,14 @@ include "../config/conexao.php";
 
       // Define o valor da data e hora atual
       dataHora.value = dataHoraAtual();
+      janelaCadastrar.classList.toggle("janelaCadastrarAtivo"); // Torna a janela visível ou oculta
 
-      if (janelaCadastrar) {
-        janelaCadastrar.classList.toggle("janelaCadastrarAtivo"); // Torna a janela visível ou oculta
-      } else {
-        console.error("janelaCadastrar não encontrada.");
-      }
-    }
 
     function retornar() {
       event.preventDefault();
       let janelaCadastrar = document.querySelector(".janelaCadastrar");
-      if (janelaCadastrar) {
-        janelaCadastrar.classList.remove("janelaCadastrarAtivo");
-      }
+      janelaCadastrar.classList.remove("janelaCadastrarAtivo");
+
     }
   </script>
 </body>
