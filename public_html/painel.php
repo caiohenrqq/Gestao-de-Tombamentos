@@ -181,13 +181,12 @@ include "../config/conexao.php";
       // Define o valor da data e hora atual
       dataHora.value = dataHoraAtual();
       janelaCadastrar.classList.toggle("janelaCadastrarAtivo"); // Torna a janela visível ou oculta
-
+    }
 
     function retornar() {
       event.preventDefault();
       let janelaCadastrar = document.querySelector(".janelaCadastrar");
       janelaCadastrar.classList.remove("janelaCadastrarAtivo");
-
     }
   </script>
 </body>
