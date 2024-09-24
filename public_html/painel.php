@@ -175,7 +175,7 @@ include "../config/conexao.php";
       return `${ano}-${mes}-${dia}T${horas}:${minutos}`;
     }
 
-    function cadastrar() { 
+    function cadastrar() {
       event.preventDefault();
       let janelaCadastrar = document.querySelector(".janelaCadastrar");
 
@@ -183,21 +183,18 @@ include "../config/conexao.php";
       dataHora.value = dataHoraAtual();
 
       if (janelaCadastrar) {
-        // Alterna a classe para mostrar ou esconder a janela
         janelaCadastrar.classList.toggle("janelaCadastrarAtivo"); // Torna a janela visível ou oculta
-        janelaCadastrar.classList.toggle("janelaCadastrar"); // Alterna a classe principal
       } else {
         console.error("janelaCadastrar não encontrada.");
       }
     }
 
     function retornar() {
+      event.preventDefault();
       let janelaCadastrar = document.querySelector(".janelaCadastrar");
       if (janelaCadastrar) {
-        // Adiciona a lógica para esconder a janela
         janelaCadastrar.classList.remove("janelaCadastrarAtivo");
-        janelaCadastrar.classList.add("janelaCadastrar");
-        }
+      }
     }
   </script>
 </body>
