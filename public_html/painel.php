@@ -117,7 +117,7 @@ include "../config/conexao.php";
               value="Cadastrar"
               class="btn btn-outline-dark"
               onclick="cadastrar()" />
-            <button onclick="cadastrar()" class="btn btn-outline-dark">
+            <button onclick="retornar()" class="btn btn-outline-dark">
               retornar
               <!-- esse botão irá fazer desaparecer a caixa de criação de novos tombamentos -->
             </button>
@@ -186,7 +186,6 @@ include "../config/conexao.php";
     }
 
     function cadastrar() {
-
       let janelaCadastrar = document.querySelector(".janelaCadastrar");
 
       // Define o valor da data e hora atual
@@ -199,6 +198,15 @@ include "../config/conexao.php";
       } else {
         console.error("janelaCadastrar não encontrada.");
       }
+    }
+
+    function retornar() {
+      let janelaCadastrar = document.querySelector(".janelaCadastrar");
+      if (janelaCadastrar) {
+        // Adiciona a lógica para esconder a janela
+        janelaCadastrar.classList.remove("janelaCadastrarAtivo");
+        janelaCadastrar.classList.add("janelaCadastrar");
+        }
     }
   </script>
 </body>
