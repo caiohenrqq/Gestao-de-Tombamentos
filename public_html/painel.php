@@ -98,7 +98,7 @@ include "../config/conexao.php";
 
           <div class="campoEntrada">
             <label for="prioridade">Prioridade:</label>
-            <select id="my-single-select" multiple>
+            <select id="my-single-select">
               <option value="minima">Miníma</option>
               <option value="moderada">Moderada</option>
               <option value="maxima">Máxima</option>
@@ -111,16 +111,8 @@ include "../config/conexao.php";
           </div>
 
           <div class="btns">
-            <input
-              type="submit"
-              name="cadastrarTombamento"
-              value="Cadastrar"
-              class="btn btn-outline-dark"
-              onclick="cadastrar()" />
-            <button onclick="retornar()" class="btn btn-outline-dark">
-              retornar
-              <!-- esse botão irá fazer desaparecer a caixa de criação de novos tombamentos -->
-            </button>
+            <input type="submit" name="cadastrarTombamento" value="Cadastrar" class="btn btn-outline-dark" />
+            <button type="button" onclick="retornar()" class="btn btn-outline-dark">Retornar</button>
           </div>
         </form>
       </div>
@@ -168,8 +160,6 @@ include "../config/conexao.php";
     const choices = new Choices(element, {
       removeItemButton: true,
       placeholderValue: "Priodade",
-      addItemText: (value) => `Você só pode selecionar "${value}"`, // Personaliza a mensagem
-      maxItemText: () => 'Apenas uma opção pode ser selecionada!',
       maxItemCount: 1,
       shouldSort: false,
     });
@@ -185,7 +175,8 @@ include "../config/conexao.php";
       return `${ano}-${mes}-${dia}T${horas}:${minutos}`;
     }
 
-    function cadastrar() {
+    function cadastrar() { 
+      event.preventDefault();
       let janelaCadastrar = document.querySelector(".janelaCadastrar");
 
       // Define o valor da data e hora atual
