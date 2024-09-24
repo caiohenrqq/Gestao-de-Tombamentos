@@ -117,7 +117,7 @@ include "../config/conexao.php";
                 class="btn btn-outline-dark"
                 onclick="cadastrar()"
               />
-              <button onclick="cadastrar()" class="btn btn-outline-dark">
+              <button onclick="fechaAddTombamentos()" class="btn btn-outline-dark">
                 retornar
                 <!-- esse botão irá fazer desaparecer a caixa de criação de novos tombamentos -->
               </button>
@@ -186,21 +186,21 @@ include "../config/conexao.php";
           }
 
           function cadastrar() {
-    // Pega o elemento da janela de cadastro
-    let janelaCadastrar = document.querySelector(".janelaCadastrar");
-    
-    // Define o valor da data e hora atual
-    dataHora.value = dataHoraAtual(); // Certifique-se de que dataHora é um elemento de entrada válido
 
-    // Verifica se a janelaCadastrar existe
-    if (janelaCadastrar) {
-          // Alterna a classe para mostrar ou esconder a janela
-          janelaCadastrar.classList.toggle("janelaCadastrarAtivo"); // Torna a janela visível ou oculta
-          janelaCadastrar.classList.toggle("janelaCadastrar"); // Alterna a classe principal
-      } else {
-          console.error("janelaCadastrar não encontrada.");
+
+        dataHora.value = dataHoraAtual(); 
       }
-  }
+    function fechaAddTombamentos() {
+        let janelaCadastrar = document.querySelector(".janelaCadastrar");
+    
+        if (janelaCadastrar) {
+              // Alterna a classe para mostrar ou esconder a janela
+              janelaCadastrar.classList.toggle("janelaCadastrarAtivo"); // Torna a janela visível ou oculta
+              janelaCadastrar.classList.toggle("janelaCadastrar"); // Alterna a classe principal
+          } else {
+              console.error("janelaCadastrar não encontrada.");
+      }
+    }
     </script>
   </body>
 </html>
