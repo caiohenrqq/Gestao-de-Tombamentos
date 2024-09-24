@@ -14,14 +14,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       // chama a função 'entrar' se o botão 'entrar' for pressionado
       if (isset($_POST['cadastarTombamento'])) {
-        cadastrarTombamento();
+        cadastrarTombamento($conexao, $id, $secretaria, $tecnico, $dataHora, $prioridade, $descricao);
       }
   } else {
       echo "Dados incompletos!";
   }
 }
 
-function cadastrarTombamento() {
+function cadastrarTombamento($conexao, $id, $secretaria, $tecnico, $dataHora, $prioridade, $descricao) {
   global $conexao;
 
   $id = $_POST['id'];
@@ -38,7 +38,7 @@ function cadastrarTombamento() {
   $prioridade = $conexao->real_escape_string($prioridade);
   $descricao = $conexao->real_escape_string($descricao);
 
-  $sql = "INSERT INTO tombamentos (id, secretaria, tecnico, dataHora, prioridade, descricao) VALUES ('id', 'secretaria', 'tecnico', 'dataHora', 'prioridade', 'descricao')";
+  $sql = "INSERT INTO tombamentos (id, secretaria, tecnico, dataHora, prioridade, descricao) VALUES ('$id', '$secretaria', '$tecnico', '$dataHora', '$prioridade', '$descricao')";
 
   if ($conexao->query($sql) === TRUE) {
     echo "tombamento " . $conexao->insert_id . "adicionado.";
