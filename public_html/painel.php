@@ -174,8 +174,7 @@ include "../config/conexao.php";
       return `${ano}-${mes}-${dia}T${horas}:${minutos}`;
     }
 
-    function cadastrar(event) {
-      event.preventDefault(event);
+    function cadastrar() {
       let janelaCadastrar = document.querySelector(".janelaCadastrar");
 
       // Define o valor da data e hora atual
@@ -183,8 +182,7 @@ include "../config/conexao.php";
       janelaCadastrar.classList.toggle("janelaCadastrarAtivo"); // Torna a janela visível ou oculta
     }
 
-    function retornar(event) {
-      event.preventDefault(event);
+    function retornar() {
       let janelaCadastrar = document.querySelector(".janelaCadastrar");
       janelaCadastrar.classList.remove("janelaCadastrarAtivo");
     }
