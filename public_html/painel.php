@@ -43,7 +43,7 @@ include "../config/conexao.php";
             </tr>
           </thead>
           <tbody id="tabela" class="table-group-divider">
-            <!-- Os dados serão inseridos aqui pelo JavaScript -->
+            <!-- os dados serão inseridos aqui pelo js -->
           </tbody>
         </table>
         <!-- logout, add e refresh -->
@@ -55,8 +55,8 @@ include "../config/conexao.php";
           </div>
 
           <div class="refresh">
-            <a href="../src/logout.php">
-              <img class="icon" src="/icons/refresh.svg" alt="atualizar" />
+            <a href="#" onclick="exibirDadosTombamento(); return false;">
+                <img class="icon" src="/icons/refresh.svg" alt="atualizar" />
             </a>
           </div>
 
@@ -131,8 +131,41 @@ include "../config/conexao.php";
 
     <!-- crud tombamentos -->
     <script>
-      var dataHora  = document.querySelector(".dataHora");   
+      // exibir dados json dos tombamentos
+      function exibirDadosTombamento() {
+        fetch('crud.php?acao=exibirtombamentos')
+          .then(response => {
+            if (!response.ok) {
+              console.error('erro na requisição: ' + response.status);
+            }
+            return response.json(); // retorna dados em json
+          })
+
+          .then(dadosTombamentos => {
+            const tabela = document.getElementById('tabela');
+
+            // se tiver dados
+            if (dadosTombamentos.length > 0) {
+              dadosTombamentos.forEach(dados => {
+                // criar nova linha
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                        <th scope="row">${dados.id}</th>
+                        <td>${dados.secretaria}</td>
+                        <td>${dados.tecnico}</td>
+                        <td>${dados.entrada}</td>
+                        <td>${dados.prioridade}</td>
+                        <td>${dados.status}</td>
+                    `;
+                    tabela.appendChild(row);
+              })
+            }
+          })
+      }
       
+      document.addEventListener('DOMContentLoaded', exibirDadosTombamento);
+
+      var dataHora  = document.querySelector(".dataHora");   
       const element = document.getElementById('my-single-select'); // Choices.js
       const choices = new Choices(element, {
         removeItemButton: true,

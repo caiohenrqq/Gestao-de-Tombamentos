@@ -49,7 +49,7 @@ function cadastrarTombamento() {
   $conexao->close();
 }
 
-function exibirTombamentos() {
+function exibirTombamentos($conexao) {
   global $conexao;
 
   $sql = "SELECT id, secretaria, tecnico, dataHora, prioridade, descricao FROM tombamentos";
@@ -69,4 +69,10 @@ function exibirTombamentos() {
   echo json_encode($dadosTombamentos);
 
   $conexao->close();
+}
+
+if (isset($_GET['acao']) && $_GET['acao'] === 'exibirtombamentos') {
+  exibirTombamentos($conexao);
+} else {
+  echo "erro na função get ação";
 }
