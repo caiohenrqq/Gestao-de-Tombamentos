@@ -1,5 +1,5 @@
 <?php
-include('/protecao.php');
+include('protecao.php');
 include "../config/conexao.php";
 ?>
 
@@ -9,6 +9,7 @@ include "../config/conexao.php";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>tombamentos | painel</title>
+    <link rel="shortcut icon" href="assets/icons/icon.png" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/style.php" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
     <link
@@ -50,25 +51,25 @@ include "../config/conexao.php";
         <div class="icons">
           <div class="cadastrar">
             <a href="javascript:void(0);" onclick="cadastrar()">
-              <img class="icon" src="/icons/add.svg" alt="adicionar" />
+              <img class="icon" src="assets/icons/add.svg" alt="adicionar" />
             </a>
           </div>
 
           <div class="refresh">
             <a href="../src/logout.php">
-              <img class="icon" src="/icons/refresh.svg" alt="atualizar" />
+              <img class="icon" src="assets/icons/refresh.svg" alt="atualizar" />
             </a>
           </div>
 
           <div class="remover">
             <a href="../src/logout.php">
-              <img class="icon" src="/icons/remove.svg" alt="remover" />
+              <img class="icon" src="assets/icons/remove.svg" alt="remover" />
             </a>
           </div>
 
           <div class="logout">
             <a href="../src/logout.php">
-              <img class="icon" src="/icons/logout.svg" alt="deslogar" />
+              <img class="icon" src="assets/icons/logout.svg" alt="deslogar" />
             </a>
           </div>
         </div>
@@ -77,7 +78,7 @@ include "../config/conexao.php";
 
         <!-- nesta sessão, irá aparecer uma caixa que possibilitará a inserção de tombamentos -->
         <div class="janelaCadastrar" id="janelaCadastrar">
-          <form action="/crud.php" method="POST">
+          <form action="" method="POST">
             <div class="campoEntrada">
               <label for="id">ID</label>
               <input type="text" id="id" name="id" />
