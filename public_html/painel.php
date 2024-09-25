@@ -10,6 +10,7 @@ if (isset($_POST['cadastrarTombamento'])) {
   $dataHora = $_POST['dataHora'];
   $prioridade = $_POST['prioridade'];
   $descricao = $_POST['descricao'];
+  $status = 1;
 
   $resultado = mysqli_query($conexao, "INSERT INTO tombamentos(tombamento_id, secretaria, tecnico, entrada, prioridade, descricao) VALUES ($id, '$secretaria', '$tecnico', '$dataHora', '$prioridade', '$descricao')");
 }
@@ -78,7 +79,9 @@ $resultadoTombamentos = $conexao->query($sql);
             echo "<td>".strtoupper($tombamentosDados['secretaria'])."</td>";
             echo "<td>".ucfirst($tombamentosDados['tecnico'])."</td>";
             echo "<td>".$tombamentosDados['entrada']."</td>";
+            echo "<td>".$tombamentosDados['saida']."</td>";
             echo "<td>".$tombamentosDados['prioridade']."</td>";
+            echo "<td>".$tombamentosDados['status']."</td>";
             echo "</tr>";
           }
           ?>
@@ -135,8 +138,8 @@ $resultadoTombamentos = $conexao->query($sql);
 
           <div class="campoEntrada">
             <label for="prioridade">Prioridade:</label>
-            <select id="my-single-select">
-              <option id="minima" value="minima">Miníma</option>
+            <select name="prioridade" id="my-single-select">
+              <option value="minima">Miníma</option>
               <option value="moderada">Moderada</option>
               <option value="maxima">Máxima</option>
             </select>
