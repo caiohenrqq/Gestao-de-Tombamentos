@@ -37,8 +37,18 @@ $resultadoTombamentos = $conexao->query($sql);
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 </head>
-
 <body>
+<style>
+        .table-borderless th, 
+        .table-borderless td {
+            border-bottom: 1px solid #ccc; /* Cor e espessura da borda inferior */
+        }
+
+        .table-borderless th,
+        .table-borderless td {
+            padding-bottom: 5px; /* Ajusta o espaçamento inferior */
+        }
+    </style>
   <section class="painel-section bg-dark">
     <div class="bem-vindo">
       <div>
@@ -48,7 +58,7 @@ $resultadoTombamentos = $conexao->query($sql);
       </div>
 
       <!-- tabela -->
-      <table class="table table-hover table-striped">
+      <table class="table table-hover table-striped table-borderless">
         <thead>
           <tr>
             <th scope="col">ID</th>
@@ -71,12 +81,6 @@ $resultadoTombamentos = $conexao->query($sql);
             echo "<td>".$tombamentosDados['prioridade']."</td>";
             echo "</tr>";
           }
-            //  <tr>
-            //   <th scope="row">1</th>
-            //   <td>Mark</td>
-            //   <td>Otto</td>
-            //   <td>@mdo</td>
-            // </tr> 
           ?>
         </tbody>
       </table>
