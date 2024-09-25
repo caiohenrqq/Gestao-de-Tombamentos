@@ -85,13 +85,13 @@ $resultadoTombamentos = $conexao->query($sql);
             echo "<td>".$tombamentosDados['entrada']."</td>";
             echo "<td>".$tombamentosDados['saida']."</td>";
             if ($prioridade === 'minima') {
-              $class = 'table-success'; 
-          } elseif ($prioridade === 'moderada') {
-              $class = 'table-warning';
-          } elseif ($prioridade === 'maxima') {
-              $class = 'table-dark';
-          }
-            echo "<td class=\"$class\">".$prioridade."</td>";
+                $class = 'table-success'; 
+            } elseif ($prioridade === 'moderada') {
+                $class = 'table-warning';
+            } elseif ($prioridade === 'maxima') {
+                $class = 'table-dark';
+            }
+            echo "<td class=\"$class\">"."</td>";
             echo "<td>".$tombamentosDados['status']."</td>";
             echo "</tr>";
           }
