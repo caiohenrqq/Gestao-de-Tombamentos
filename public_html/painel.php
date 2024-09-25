@@ -13,6 +13,10 @@ if (isset($_POST['cadastrarTombamento'])) {
 
   $resultado = mysqli_query($conexao, "INSERT INTO tombamentos(tombamento_id, secretaria, tecnico, entrada, prioridade, descricao) VALUES ($id, '$secretaria', '$tecnico', '$dataHora', '$prioridade', '$descricao')");
 }
+
+$sql = "SELECT * FROM tombamentos ORDER BY entrada ASC";
+$resultadoTombamentos = $conexao->query($sql);
+
 ?>
 
 <!DOCTYPE html>
@@ -57,7 +61,23 @@ if (isset($_POST['cadastrarTombamento'])) {
           </tr>
         </thead>
         <tbody id="tabela" class="table-group-divider">
-          <!-- Os dados serão inseridos aqui pelo JavaScript -->
+          <?php
+          while ($tombamentosDados = mysqli_fetch_assoc($resultadoTombamentos)) {
+            echo "<tr>";
+            echo "<th>".$tombamentosDados['tombamento_id']."</th>";
+            echo "<td>".$tombamentosDados['secretaria']."</td>";
+            echo "<td>".$tombamentosDados['tecnico']."</td>";
+            echo "<td>".$tombamentosDados['entrada']."</td>";
+            echo "<td>".$tombamentosDados['prioridade']."</td>";
+            echo "</tr>";
+          }
+            //  <tr>
+            //   <th scope="row">1</th>
+            //   <td>Mark</td>
+            //   <td>Otto</td>
+            //   <td>@mdo</td>
+            // </tr> 
+          ?>
         </tbody>
       </table>
       <!-- logout, add e refresh -->
