@@ -27,7 +27,8 @@ $resultadoTombamentos = $conexao->query($sql);
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>tombamentos | painel</title>
-  <link rel="shortcut icon" href="assets/icons/icon.png" type="image/x-icon">
+  <!-- icone logo -->
+  <link rel="shortcut icon" href="assets/icons/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="assets/css/style.php" />
   <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
   <link
