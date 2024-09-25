@@ -1,6 +1,17 @@
 <?php
 include('protecao.php');
 include "../config/conexao.php";
+
+if (isset($_POST['cadastrarTombamento'])) {
+  $id = $_POST['id'];
+  $secretaria = $_POST['secretaria'];
+  $tecnico = $_POST['tecnico'];
+  $dataHora = $_POST['dataHora'];
+  $prioridade = $_POST['prioridade'];
+  $descricao = $_POST['descricao'];
+
+  $resultado = mysqli_query($conexao, "INSERT INTO tombamentos(tombamento_id, secretaria, tecnico, dataHora, prioridade, descricao) VALUES ('$id', '$secretaria', '$tecnico', '$dataHora', '$prioridade', '$descricao')");
+}
 ?>
 
 <!DOCTYPE html>
@@ -79,7 +90,7 @@ include "../config/conexao.php";
 
       <!-- nesta sessão, irá aparecer uma caixa que possibilitará a inserção de tombamentos -->
       <div class="janelaCadastrar" id="janelaCadastrar">
-        <form action="" method="POST">
+        <form action="painel.php" method="POST">
           <div class="campoEntrada">
             <label for="id">ID</label>
             <input type="text" id="id" name="id" />
@@ -111,7 +122,7 @@ include "../config/conexao.php";
             <input placeholder="Computador Lenovo com problema no HD..." type="text" id="descricao" name="descricao" />
           </div>
 
-          <div class="btns">
+          <div class="btns">  
             <input
               type="submit"
               name="cadastrarTombamento"
@@ -164,7 +175,7 @@ include "../config/conexao.php";
     }
 
     function retornar() {
-      janelaCadastrar.classList.toggle("janelaCadastrar"); // off
+      janelaCadastrar.classList.toggle("janelaCadastrar"); // off 
       janelaCadastrar.classList.toggle("janelaCadastrarAtivo"); // on
     }
 
