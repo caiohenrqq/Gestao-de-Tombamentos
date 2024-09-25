@@ -2,6 +2,7 @@
 include('protecao.php');
 include "../config/conexao.php";
 
+// Lógica para pegar dados do formulário cadastro tombamentos
 if (isset($_POST['cadastrarTombamento'])) {
   $id = $_POST['id'];
   $secretaria = $_POST['secretaria'];
@@ -10,7 +11,7 @@ if (isset($_POST['cadastrarTombamento'])) {
   $prioridade = $_POST['prioridade'];
   $descricao = $_POST['descricao'];
 
-  $resultado = mysqli_query($conexao, "INSERT INTO tombamentos(tombamento_id, secretaria, tecnico, dataHora, prioridade, descricao) VALUES ('$id', '$secretaria', '$tecnico', '$dataHora', '$prioridade', '$descricao')");
+  $resultado = mysqli_query($conexao, "INSERT INTO tombamentos(tombamento_id, secretaria, tecnico, entrada, prioridade, descricao) VALUES ($id, '$secretaria', '$tecnico', '$dataHora', '$prioridade', '$descricao')");
 }
 ?>
 
