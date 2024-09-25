@@ -374,3 +374,17 @@ body {
   text-align: center;
 }
 
+.minima {
+  color: green;
+}
+
+.moderada {
+  color: orange;
+}
+
+.maxima {
+  color: red;
+}
+
+
+

@@ -43,12 +43,12 @@ $resultadoTombamentos = $conexao->query($sql);
 <style>
         .table-borderless th, 
         .table-borderless td {
-            border-bottom: 1px solid #ccc; /* Cor e espessura da borda inferior */
+            border-bottom: 1px solid #ccc;
         }
 
         .table-borderless th,
         .table-borderless td {
-            padding-bottom: 5px; /* Ajusta o espaçamento inferior */
+            padding-bottom: 5px;
         }
     </style>
   <section class="painel-section bg-dark">
@@ -75,13 +75,23 @@ $resultadoTombamentos = $conexao->query($sql);
         <tbody id="tabela" class="table-group-divider">
           <?php
           while ($tombamentosDados = mysqli_fetch_assoc($resultadoTombamentos)) {
+            $prioridade = $tombamentosDados['prioridade']; // implementação para mudar a cor de prioridade, dependendo do que o técnico ter escolhido
+            $class = '';
+
             echo "<tr>";
             echo "<th>".$tombamentosDados['tombamento_id']."</th>";
             echo "<td>".strtoupper($tombamentosDados['secretaria'])."</td>";
             echo "<td>".ucfirst($tombamentosDados['tecnico'])."</td>";
             echo "<td>".$tombamentosDados['entrada']."</td>";
             echo "<td>".$tombamentosDados['saida']."</td>";
-            echo "<td>".$tombamentosDados['prioridade']."</td>";
+            if ($prioridade === 'minima') {
+              $class = 'table-success'; 
+          } elseif ($prioridade === 'moderada') {
+              $class = 'table-warning';
+          } elseif ($prioridade === 'maxima') {
+              $class = 'table-dark';
+          }
+            echo "<td class=\"$class\">".$prioridade."</td>";
             echo "<td>".$tombamentosDados['status']."</td>";
             echo "</tr>";
           }
