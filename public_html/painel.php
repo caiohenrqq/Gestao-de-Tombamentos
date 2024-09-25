@@ -107,19 +107,19 @@ $resultadoTombamentos = $conexao->query($sql);
         </div>
 
         <div class="editar">
-          <a href="../src/logout.php">
+          <a href="../logout.php">
             <img class="icon" src="assets/icons/edit.svg" alt="editar" />
           </a>
         </div>
 
         <div class="remover">
-          <a href="../src/logout.php">
+          <a href="../logout.php">
             <img class="icon" src="assets/icons/remove.svg" alt="remover" />
           </a>
         </div>
 
         <div class="logout">
-          <a href="../src/logout.php">
+          <a href="../logout.php">
             <img class="icon" src="assets/icons/logout.svg" alt="deslogar" />
           </a>
         </div>
