@@ -290,7 +290,7 @@ body {
 .bem-vindo {
   font-size: 1.5rem;
   position: relative;
-  width: 50rem;
+  width: auto;
   height: 40rem;
   border-width: 1px;
   border-radius: 8%;
@@ -315,6 +315,10 @@ body {
 .icons {
   align-self: flex-end;
   margin-top: auto;
+}
+
+.icons :nth-child(4) {
+  margin-right: -4px;
 }
 
 .icon {

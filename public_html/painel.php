@@ -14,7 +14,7 @@ if (isset($_POST['cadastrarTombamento'])) {
   $resultado = mysqli_query($conexao, "INSERT INTO tombamentos(tombamento_id, secretaria, tecnico, entrada, prioridade, descricao) VALUES ($id, '$secretaria', '$tecnico', '$dataHora', '$prioridade', '$descricao')");
 }
 
-$sql = "SELECT * FROM tombamentos ORDER BY entrada ASC";
+$sql = "SELECT * FROM tombamentos ORDER BY entrada DESC";
 $resultadoTombamentos = $conexao->query($sql);
 
 ?>
@@ -75,8 +75,8 @@ $resultadoTombamentos = $conexao->query($sql);
           while ($tombamentosDados = mysqli_fetch_assoc($resultadoTombamentos)) {
             echo "<tr>";
             echo "<th>".$tombamentosDados['tombamento_id']."</th>";
-            echo "<td>".$tombamentosDados['secretaria']."</td>";
-            echo "<td>".$tombamentosDados['tecnico']."</td>";
+            echo "<td>".strtoupper($tombamentosDados['secretaria'])."</td>";
+            echo "<td>".ucfirst($tombamentosDados['tecnico'])."</td>";
             echo "<td>".$tombamentosDados['entrada']."</td>";
             echo "<td>".$tombamentosDados['prioridade']."</td>";
             echo "</tr>";
@@ -92,9 +92,9 @@ $resultadoTombamentos = $conexao->query($sql);
           </a>
         </div>
 
-        <div class="refresh">
+        <div class="editar">
           <a href="../src/logout.php">
-            <img class="icon" src="assets/icons/refresh.svg" alt="atualizar" />
+            <img class="icon" src="assets/icons/edit.svg" alt="editar" />
           </a>
         </div>
 
@@ -136,7 +136,7 @@ $resultadoTombamentos = $conexao->query($sql);
           <div class="campoEntrada">
             <label for="prioridade">Prioridade:</label>
             <select id="my-single-select">
-              <option value="minima">Miníma</option>
+              <option id="minima" value="minima">Miníma</option>
               <option value="moderada">Moderada</option>
               <option value="maxima">Máxima</option>
             </select>
@@ -174,8 +174,10 @@ $resultadoTombamentos = $conexao->query($sql);
     const element = document.getElementById('my-single-select'); // Choices.js
     const choices = new Choices(element, {
       removeItemButton: true,
-      maxItemCount: 1,
+      maxItemCount: 2,
       shouldSort: false,
+      maxItemCount: () => 'Você pode adicionar apenas 1 item.',
+      placeholderValue: 'Qual a prioridade?',
     });
 
     function dataHoraAtual() {
