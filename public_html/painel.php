@@ -117,15 +117,13 @@ include "../config/conexao.php";
               name="cadastrarTombamento"
               value="Cadastrar"
               id="cadastrar"
-              class="btn btn-outline-dark"
-              onclick="cadastrar()" />
-              <input
+              class="btn btn-outline-dark"/>
+            <input
               type="button"
               name="cadastrarTombamento"
               value="Retornar"
               id="retornar"
-              class="btn btn-outline-dark"
-              onclick="retornar()" />
+              class="btn btn-outline-dark"/>
           </div>
         </form>
       </div>
@@ -137,7 +135,6 @@ include "../config/conexao.php";
   <!-- crud tombamentos -->
   <script>
     var dataHora = document.querySelector(".dataHora");
-
     const element = document.getElementById('my-single-select'); // Choices.js
     const choices = new Choices(element, {
       removeItemButton: true,
@@ -155,30 +152,30 @@ include "../config/conexao.php";
 
       return `${ano}-${mes}-${dia}T${horas}:${minutos}`;
     }
-    var janelaCadastrar = document.getElementById("janelaCadastrar"); // pega elemento janelaCadastrar
+
+    const janelaCadastrar = document.getElementById("janelaCadastrar"); // pega elemento janelaCadastrar
 
     function cadastrar() {
       dataHora.value = dataHoraAtual();
 
       // se janelaCadastrar for TRUE, isto é, se ela existir, utiliza o elemento toggle para alternar entre ativo e desabilitado.
-        janelaCadastrar.classList.toggle("janelaCadastrar"); // off
-        janelaCadastrar.classList.toggle("janelaCadastrarAtivo"); // on
-
-      if (janelaCadastrar.classList.contains("janelaCadastrarAtivo")) {
-        console.log("caraca mlk");
-      } else {
-        console.log("pica");
-      }
+      janelaCadastrar.classList.toggle("janelaCadastrar"); // off
+      janelaCadastrar.classList.toggle("janelaCadastrarAtivo"); // on
     }
 
     function retornar() {
-      janelaCadastrar.classList.remove("janelaCadastrarAtivo");
-      janelaCadastrar.classList.add("janelaCadastrar");
+      janelaCadastrar.classList.toggle("janelaCadastrar"); // off
+      janelaCadastrar.classList.toggle("janelaCadastrarAtivo"); // on
     }
 
-      // Associa as funções aos botões
-    document.getElementById("cadastrar").addEventListener("click", cadastrar);
-    document.getElementById("retornar").addEventListener("click", retornar);
+    // adiciona ouvinte de evento para quando o usuário clicar, retornar a funçao
+
+    window.addEventListener('DOMContentLoaded', function() {
+      const cadastrarBtn = document.getElementById('cadastrar');
+      const retornarBtn = document.getElementById('retornar');
+      cadastrarBtn.addEventListener('click', cadastrar);
+      retornarBtn.addEventListener('click', retornar);
+    });
   </script>
 </body>
 
