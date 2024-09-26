@@ -70,6 +70,7 @@ $resultadoTombamentos = $conexao->query($sql);
             <th scope="col">Saída</th>
             <th scope="col">Prioridade</th>
             <th scope="col">Status</th>
+            <th scope="col">Ações</th>
           </tr>
         </thead>
         <tbody id="tabela" class="table-group-divider">
@@ -93,12 +94,27 @@ $resultadoTombamentos = $conexao->query($sql);
             }
             echo "<td class=\"$class\">"."</td>";
             echo "<td>".$tombamentosDados['status']."</td>";
+            echo 
+            '<td>
+            <div class="acoes-tab">
+              <div class="editar">
+                <a href="logout.php">
+                  <img class="icon" src="assets/icons/edit.svg" alt="editar" />
+                </a>
+              </div>
+              <div class="remover">
+                <a href="logout.php">
+                  <img class="icon" src="assets/icons/remove.svg" alt="remover" />
+                </a>
+              </div>
+            </div>
+            </td>';
             echo "</tr>";
           }
           ?>
         </tbody>
       </table>
-      <!-- logout, add e refresh -->
+      <!-- logout e add -->
       <div class="icons">
         <div class="cadastrar">
           <a href="javascript:void(0);" onclick="cadastrar()">
@@ -106,20 +122,8 @@ $resultadoTombamentos = $conexao->query($sql);
           </a>
         </div>
 
-        <div class="editar">
-          <a href="../logout.php">
-            <img class="icon" src="assets/icons/edit.svg" alt="editar" />
-          </a>
-        </div>
-
-        <div class="remover">
-          <a href="../logout.php">
-            <img class="icon" src="assets/icons/remove.svg" alt="remover" />
-          </a>
-        </div>
-
         <div class="logout">
-          <a href="../logout.php">
+          <a href="/logout.php">
             <img class="icon" src="assets/icons/logout.svg" alt="deslogar" />
           </a>
         </div>

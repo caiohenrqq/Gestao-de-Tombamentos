@@ -374,5 +374,12 @@ body {
   text-align: center;
 }
 
+.acoes-tab {
+  display: flex;
+  flex-direction: row;
+  gap: .5rem;
+}
+
+
 
 
