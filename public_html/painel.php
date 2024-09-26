@@ -20,7 +20,6 @@ if (isset($_POST['cadastrarTombamento'])) {
 $sqlExibir = "SELECT * FROM tombamentos ORDER BY entrada DESC";  // pega tudo
 $resultadoTombamentos = $conexao->query($sqlExibir);
 
-
 ?>
 
 <!DOCTYPE html>
