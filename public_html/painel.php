@@ -2,7 +2,7 @@
 include('protecao.php');
 include "../config/conexao.php";
 
-// Lógica para pegar dados do formulário cadastro tombamentos
+// lógica para pegar dados do formulário cadastro tombamentos
 if (isset($_POST['cadastrarTombamento'])) {
   $id = $_POST['id'];
   $secretaria = $_POST['secretaria'];
@@ -15,8 +15,8 @@ if (isset($_POST['cadastrarTombamento'])) {
   $resultado = mysqli_query($conexao, "INSERT INTO tombamentos(tombamento_id, secretaria, tecnico, entrada, prioridade, descricao) VALUES ($id, '$secretaria', '$tecnico', '$dataHora', '$prioridade', '$descricao')");
 }
 
-$sql = "SELECT * FROM tombamentos ORDER BY entrada DESC";
-$resultadoTombamentos = $conexao->query($sql);
+$sqlExibir = "SELECT * FROM tombamentos ORDER BY entrada DESC";
+$resultadoTombamentos = $conexao->query($sqlExibir);
 
 ?>
 
@@ -63,7 +63,7 @@ $resultadoTombamentos = $conexao->query($sql);
       <table class="table table-hover table-striped table-borderless">
         <thead>
           <tr>
-            <th scope="col">ID</th>
+            <th scope="col">Tombamento</th>
             <th scope="col">Secretaria</th>
             <th scope="col">Técnico</th>
             <th scope="col">Entrada</th>
@@ -78,7 +78,6 @@ $resultadoTombamentos = $conexao->query($sql);
           while ($tombamentosDados = mysqli_fetch_assoc($resultadoTombamentos)) {
             $prioridade = $tombamentosDados['prioridade']; // implementação para mudar a cor de prioridade, dependendo do que o técnico ter escolhido
             $class = '';
-
             echo "<tr>";
             echo "<th>".$tombamentosDados['tombamento_id']."</th>";
             echo "<td>".strtoupper($tombamentosDados['secretaria'])."</td>";
@@ -98,7 +97,7 @@ $resultadoTombamentos = $conexao->query($sql);
             '<td>
             <div class="acoes-tab">
               <div class="editar">
-                <a href="logout.php">
+                <a href="editar.php?id=$tombamentosDados[id]">
                   <img class="icon" src="assets/icons/edit.svg" alt="editar" />
                 </a>
               </div>
@@ -135,7 +134,7 @@ $resultadoTombamentos = $conexao->query($sql);
       <div class="janelaCadastrar" id="janelaCadastrar">
         <form action="painel.php" method="POST">
           <div class="campoEntrada">
-            <label for="id">ID</label>
+            <label for="id">Tombamento</label>
             <input type="text" id="id" name="id" />
           </div>
           <div class="campoEntrada">
@@ -194,6 +193,7 @@ $resultadoTombamentos = $conexao->query($sql);
       </div>
 
       <hr class="linha" />
+
     </div>
   </section>
 
@@ -227,7 +227,7 @@ $resultadoTombamentos = $conexao->query($sql);
       const dia = String(data.getDate()).padStart(2, '0');
       const horas = String(data.getHours()).padStart(2, '0');
       const minutos = String(data.getMinutes()).padStart(2, '0');
-
+      // alterar formato da datas  
       return `${ano}-${mes}-${dia}T${horas}:${minutos}`;
     }
 
