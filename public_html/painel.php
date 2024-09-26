@@ -1,8 +1,9 @@
 <?php
-include('protecao.php');
-include "../config/conexao.php";
+include 'protecao.php';
+include '../config/conexao.php';
+include 'editar.php';
 
-// lógica para pegar dados do formulário cadastro tombamentos
+// lógica para pegar dados do formulário cadastro tombamentos e inserir no mysql
 if (isset($_POST['cadastrarTombamento'])) {
   $id = $_POST['id'];
   $secretaria = $_POST['secretaria'];
@@ -15,8 +16,10 @@ if (isset($_POST['cadastrarTombamento'])) {
   $resultado = mysqli_query($conexao, "INSERT INTO tombamentos(tombamento_id, secretaria, tecnico, entrada, prioridade, descricao) VALUES ($id, '$secretaria', '$tecnico', '$dataHora', '$prioridade', '$descricao')");
 }
 
-$sqlExibir = "SELECT * FROM tombamentos ORDER BY entrada DESC";
+// lógica para ordenar os itens por entrada
+$sqlExibir = "SELECT * FROM tombamentos ORDER BY entrada DESC";  // pega tudo
 $resultadoTombamentos = $conexao->query($sqlExibir);
+
 
 ?>
 
@@ -97,7 +100,7 @@ $resultadoTombamentos = $conexao->query($sqlExibir);
             '<td>
             <div class="acoes-tab">
               <div class="editar">
-                <a href="editar.php?id=$tombamentosDados[id]">
+                <a href="#?id='.$tombamentosDados['indice'].'">
                   <img class="icon" src="assets/icons/edit.svg" alt="editar" />
                 </a>
               </div>
@@ -144,7 +147,7 @@ $resultadoTombamentos = $conexao->query($sqlExibir);
           <div class="campoEntrada">
             <label for="tecnico">Técnico</label>
             <input type="text" id="tecnico" name="tecnico" />
-          </div>
+          </div>    
           <div class="campoEntrada">
             <label for="dataHora">Entrada (DD-MM-AAAA)</label>
             <input class="dataHora" type="datetime-local" id="dataHora" name="dataHora" />
