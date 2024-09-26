@@ -147,13 +147,13 @@ $resultadoTombamentos = $conexao->query($sql);
             <input type="text" id="tecnico" name="tecnico" />
           </div>
           <div class="campoEntrada">
-            <label for="dataHora">Entrada (DD-MM-YYYY)</label>
+            <label for="dataHora">Entrada (DD-MM-AAAA)</label>
             <input class="dataHora" type="datetime-local" id="dataHora" name="dataHora" />
           </div>
 
           <div class="campoEntrada">
             <label for="prioridade">Prioridade:</label>
-            <select name="prioridade" id="my-single-select">
+            <select name="prioridade" id="prioridade">
               <option value="minima">Miníma</option>
               <option value="moderada">Moderada</option>
               <option value="maxima">Máxima</option>
@@ -163,6 +163,17 @@ $resultadoTombamentos = $conexao->query($sql);
           <div class="campoEntrada">
             <label for="descricao">Descrição</label>
             <input placeholder="Computador Lenovo com problema no HD..." type="text" id="descricao" name="descricao" />
+          </div>
+          
+          <div class="campoEntrada">
+            <label for="status">Status</label>
+            <select name="status" id="status">
+              <option value="avaliando">Avaliando</option>
+              <option value="estragado">Estragado</option>
+              <option value="consertando">Consertando</option>
+              <option value="aguardando_entrega">Aguardando Entrega</option>
+              <option value="finalizado">Finalizado</option>
+            </select>
           </div>
 
           <div class="btns">  
@@ -189,13 +200,24 @@ $resultadoTombamentos = $conexao->query($sql);
   <!-- crud tombamentos -->
   <script>
     var dataHora = document.querySelector(".dataHora");
-    const element = document.getElementById('my-single-select'); // Choices.js
-    const choices = new Choices(element, {
+    const prioridade = document.getElementById('prioridade'); // Choices.js
+    const prioridadeChoices = new Choices(prioridade, {
       removeItemButton: true,
       maxItemCount: 2,
       shouldSort: false,
       maxItemCount: () => 'Você pode adicionar apenas 1 item.',
       placeholderValue: 'Qual a prioridade?',
+      itemSelectText: '',
+    });
+    
+    const status = document.getElementById('status'); // Choices.js
+    const statusChoices = new Choices(status, {
+      removeItemButton: true,
+      maxItemCount: 2,
+      shouldSort: false,
+      maxItemCount: () => 'Você pode adicionar apenas 1 item.',
+      placeholderValue: 'Qual a prioridade?',
+      itemSelectText: '',
     });
 
     function dataHoraAtual() {

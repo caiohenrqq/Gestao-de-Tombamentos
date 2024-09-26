@@ -352,7 +352,7 @@ body {
   text-align: left;
 
   z-index: 1000;
-  height: 37.5rem;
+  height: auto;
   border-width: 1px;
   border-radius: 8%;
   border-style: solid;
@@ -365,13 +365,14 @@ body {
 .janelaCadastrarAtivo input {
   font-size: 1rem;
   width: 100%;
-  margin: 1px 0 12px 0;
+  margin: 5px 0 12px 5px;
   border: solid 1px var(--corBorda);
   border-radius: 10px;
 }
 
 .btns {
   text-align: center;
+  margin-top: 15px;
 }
 
 .acoes-tab {
