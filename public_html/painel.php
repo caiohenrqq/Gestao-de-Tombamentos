@@ -16,9 +16,19 @@ if (isset($_POST['cadastrarTombamento'])) {
 }
 
 // lógica para ordenar os itens por entrada
-$sqlExibir = "SELECT * FROM tombamentos ORDER BY entrada DESC";  // pega tudo
+$sqlExibir = "SELECT * FROM tombamentos ORDER BY entrada DESC";  // pega tudo, incluindo indice (chave primária)
 $resultadoTombamentos = $conexao->query($sqlExibir);
 
+// lógica para alterar dados dos tombamentos
+
+if (!empty($_GET['indice'])) {
+  $indice = $GET['indice'];
+
+  $sqlSelecionarIndice = "SELECT * FROM tombamentos WHERE indice=$indice";
+  $resultadoIndice = $conexao->query($sqlSelecionarIndice);
+
+  print_r($resultadoIndice);
+}
 ?>
 
 <!DOCTYPE html>
@@ -127,7 +137,7 @@ $resultadoTombamentos = $conexao->query($sqlExibir);
             '<td>
             <div class="acoes-tab">
               <div class="editar">
-                <a href="#?id='.$tombamentosDados['indice'].'">
+                <a id="editar" href="#?indice='.$tombamentosDados['indice'].'">
                   <img class="icon" src="assets/icons/edit.svg" alt="editar" />
                 </a>
               </div>
@@ -180,7 +190,7 @@ $resultadoTombamentos = $conexao->query($sqlExibir);
             <input class="dataHora" type="datetime-local" id="dataHora" name="dataHora" />
           </div>
 
-          <div class="campoEntrada">
+          <div class="campoEntrada">  
             <label for="prioridade">Prioridade:</label>
             <select name="prioridade" id="prioridade">
               <option value="minima">Miníma</option>
@@ -271,18 +281,23 @@ $resultadoTombamentos = $conexao->query($sqlExibir);
       janelaCadastrar.classList.toggle("janelaCadastrarAtivo"); // on
     }
 
-    function retornar() {
+    function abrirFecharCadastrar() {
       janelaCadastrar.classList.toggle("janelaCadastrar"); // off 
       janelaCadastrar.classList.toggle("janelaCadastrarAtivo"); // on
     }
 
     // adiciona ouvinte de evento para quando o usuário clicar, retornar a funçao
-
     window.addEventListener('DOMContentLoaded', function() {
       const cadastrarBtn = document.getElementById('cadastrar');
+      if (cadastrarBtn) {
+        dataHora.value = dataHoraAtual();
+        cadastrarBtn.addEventListener('click', abrirFecharCadastrar);
+      }
+      
       const retornarBtn = document.getElementById('retornar');
-      cadastrarBtn.addEventListener('click', cadastrar);
-      retornarBtn.addEventListener('click', retornar);
+      const editarBtn = document.getElementById('editar');  
+      retornarBtn.addEventListener('click', abrirFecharCadastrar);
+      editarBtn.addEventListener('click', abrirFecharCadastrar);
     });
   </script>
 </body>
