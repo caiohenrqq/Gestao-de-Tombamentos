@@ -382,8 +382,11 @@
   }
 
   .pararAnimacao {
-;
     transform: scale(1) !important; /* Mantém o tamanho máximo */
     opacity: 1 !important; /* Mantém a opacidade total */
+  }
+
+  .spinner-grow {
+    --bs-spinner-animation-speed: 3s !important;
   }
 

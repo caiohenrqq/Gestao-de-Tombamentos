@@ -10,7 +10,7 @@ if (isset($_POST['cadastrarTombamento'])) {
   $dataHora = $_POST['dataHora'];
   $prioridade = $_POST['prioridade'];
   $descricao = $_POST['descricao'];
-
+  $status = $_POST['status'];
   $resultado = mysqli_query($conexao, "INSERT INTO tombamentos(tombamento_id, secretaria, tecnico, entrada, prioridade, descricao) VALUES ($id, '$secretaria', '$tecnico', '$dataHora', '$prioridade', '$descricao')");
 }
 
@@ -80,6 +80,7 @@ $resultadoTombamentos = $conexao->query($sqlExibir);
             $status = $tombamentosDados['status']; // mesma coisa, só que pra status
             $classPrioridade = '';
             $classStatus = '';
+            $textoStatus = '';
 
             echo "<tr>";
             echo "<th>".$tombamentosDados['tombamento_id']."</th>";
@@ -95,20 +96,30 @@ $resultadoTombamentos = $conexao->query($sqlExibir);
                 $classPrioridade = 'table-dark';
             }
             echo "<td class=\"$classPrioridade\">"."</td>";
-            if ($status === 'ativo') {
-              $classStatus = 'spinner-grow spinner-grow-sm text-success';
-            }
+            if ($status === 'finalizado') {
+              $textoStatus = "| Finalizado";
+              $classStatus = 'spinner-grow spinner-grow-sm text-success pararAnimacao';
+            } elseif ($status === 'estragado') {
+              $textoStatus = "| Estragado";
+              $classStatus = 'spinner-grow spinner-grow-sm text-dark pararAnimacao';
+            } elseif ($status === 'consertando') {
+              $textoStatus = "| Consertando";
+              $classStatus = 'spinner-grow spinner-grow-sm text-primary';
+            } elseif ($status === 'avaliando') {
+              $textoStatus = "| Avaliando";
+              $classStatus = 'spinner-grow spinner-grow-sm text-info';
+            } elseif ($status === 'aguardando_entrega') {
+              $textoStatus = "| Aguardando Entrega";
+              $classStatus = 'spinner-grow spinner-grow-sm text-warning';
+            } 
             // aqui ele vai receber dependendo da lógica, a classe de classStatus, e no style a gente altera a velocidade da bolinha.
-
             // a classe **pararAnimacao**, para a animação do bootstrap e mantém o transform em scale(1), mostrando todo seu tamanho.
-            echo "<td>
-                    <div class=\"$classStatus\" role=\"status\" 
-                    style='
-                    --bs-spinner-animation-speed: 2s;
-
-                    '>
+            echo "<td style='text-align: left;'>
+            
+                    <div class=\"$classStatus\" role=\"status\" >
                         <span class=\"visually-hidden\">Loading...</span>
                     </div>
+                    <a>$textoStatus</a>
                   </td>";
             echo 
             '<td>
