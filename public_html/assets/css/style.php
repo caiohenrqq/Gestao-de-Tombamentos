@@ -278,7 +278,7 @@
     font-size: 1rem;
   }
 
-  /* sessão painel.php */
+  /* sess ão painel.php */
 
   .painel-section {
     display: flex;
@@ -381,8 +381,9 @@
     gap: .5rem;
   }
 
-  .spinner-grow {
-    
+  .pararAnimacao {
+;
+    transform: scale(1) !important; /* Mantém o tamanho máximo */
+    opacity: 1 !important; /* Mantém a opacidade total */
   }
-
 

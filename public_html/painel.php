@@ -1,7 +1,6 @@
 <?php
 include 'protecao.php';
 include '../config/conexao.php';
-include 'editar.php';
 
 // lógica para pegar dados do formulário cadastro tombamentos e inserir no mysql
 if (isset($_POST['cadastrarTombamento'])) {
@@ -97,10 +96,17 @@ $resultadoTombamentos = $conexao->query($sqlExibir);
             }
             echo "<td class=\"$classPrioridade\">"."</td>";
             if ($status === 'ativo') {
-              $classStatus = 'spinner-grow text-success';
+              $classStatus = 'spinner-grow spinner-grow-sm text-success';
             }
+            // aqui ele vai receber dependendo da lógica, a classe de classStatus, e no style a gente altera a velocidade da bolinha.
+
+            // a classe **pararAnimacao**, para a animação do bootstrap e mantém o transform em scale(1), mostrando todo seu tamanho.
             echo "<td>
-                    <div class=\"$classStatus\" role=\"status\">
+                    <div class=\"$classStatus\" role=\"status\" 
+                    style='
+                    --bs-spinner-animation-speed: 2s;
+
+                    '>
                         <span class=\"visually-hidden\">Loading...</span>
                     </div>
                   </td>";
