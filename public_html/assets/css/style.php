@@ -390,3 +390,15 @@
     --bs-spinner-animation-speed: 3s !important;
   }
 
+  .corPrioridadeModerada {
+    background-color: yellow !important;
+  }
+
+  .corPrioridadeMinima {
+    background-color: green !important;
+  }
+
+  .corPrioridadeMaxima {
+    background-color: red !important;
+  }
+

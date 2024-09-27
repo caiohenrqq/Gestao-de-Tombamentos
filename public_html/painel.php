@@ -11,7 +11,8 @@ if (isset($_POST['cadastrarTombamento'])) {
   $prioridade = $_POST['prioridade'];
   $descricao = $_POST['descricao'];
   $status = $_POST['status'];
-  $resultado = mysqli_query($conexao, "INSERT INTO tombamentos(tombamento_id, secretaria, tecnico, entrada, prioridade, descricao) VALUES ($id, '$secretaria', '$tecnico', '$dataHora', '$prioridade', '$descricao')");
+
+  $resultado = mysqli_query($conexao, "INSERT INTO tombamentos(tombamento_id, secretaria, tecnico, entrada, prioridade, descricao, status) VALUES ($id, '$secretaria', '$tecnico', '$dataHora', '$prioridade', '$descricao', '$status')");
 }
 
 // lógica para ordenar os itens por entrada
@@ -81,6 +82,7 @@ $resultadoTombamentos = $conexao->query($sqlExibir);
             $classPrioridade = '';
             $classStatus = '';
             $textoStatus = '';
+            $corPrioridade = '';
 
             echo "<tr>";
             echo "<th>".$tombamentosDados['tombamento_id']."</th>";
@@ -89,13 +91,13 @@ $resultadoTombamentos = $conexao->query($sqlExibir);
             echo "<td>".$tombamentosDados['entrada']."</td>";
             echo "<td>".$tombamentosDados['saida']."</td>";
             if ($prioridade === 'minima') {
-                $classPrioridade = 'table-success'; 
+                $classPrioridade = 'corPrioridadeMinima'; 
             } elseif ($prioridade === 'moderada') {
-                $classPrioridade = 'table-warning';
+                $classPrioridade = 'corPrioridadeModerada';
             } elseif ($prioridade === 'maxima') {
-                $classPrioridade = 'table-dark';
+                $classPrioridade = 'corPrioridadeMaxima';
             }
-            echo "<td class=\"$classPrioridade\">"."</td>";
+            echo "<td class=\"$classPrioridade\"></td>";
             if ($status === 'finalizado') {
               $textoStatus = "| Finalizado";
               $classStatus = 'spinner-grow spinner-grow-sm text-success pararAnimacao';
