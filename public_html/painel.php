@@ -127,7 +127,6 @@ if (!empty($_GET['indice'])) {
             // aqui ele vai receber dependendo da lógica, a classe de classStatus, e no style a gente altera a velocidade da bolinha.
             // a classe **pararAnimacao**, para a animação do bootstrap e mantém o transform em scale(1), mostrando todo seu tamanho.
             echo "<td style='text-align: left;'>
-            
                     <div class=\"$classStatus\" role=\"status\" >
                         <span class=\"visually-hidden\">Loading...</span>
                     </div>
@@ -137,7 +136,7 @@ if (!empty($_GET['indice'])) {
             '<td>
             <div class="acoes-tab">
               <div class="editar">
-                <a id="editar" href="#?indice='.$tombamentosDados['indice'].'">
+                <a class="editarBtns" href="#?indice='.$tombamentosDados['indice'].'">
                   <img class="icon" src="assets/icons/edit.svg" alt="editar" />
                 </a>
               </div>
@@ -273,8 +272,6 @@ if (!empty($_GET['indice'])) {
 
     const janelaCadastrar = document.getElementById("janelaCadastrar"); // pega elemento janelaCadastrar
 
-
-
     function abrirFecharCadastrar() {
       janelaCadastrar.classList.toggle("janelaCadastrar"); // off 
       janelaCadastrar.classList.toggle("janelaCadastrarAtivo"); // on
@@ -289,9 +286,12 @@ if (!empty($_GET['indice'])) {
       }
       
       const retornarBtn = document.getElementById('retornar');
-      const editarBtn = document.getElementById('editar');  
+      const editarBtns = document.querySelectorAll('.editarBtns');  
       retornarBtn.addEventListener('click', abrirFecharCadastrar);
-      editarBtn.addEventListener('click', abrirFecharCadastrar);
+      // querySelectorAll pega todos os elementos e guarda na nodelist, forEach itera sobre, onde irá retornar uma arrow function chamada btn que, para cada btn que encontrar, abrirá/fechará a tela de cadastro.
+      editarBtns.forEach(btn => {
+        btn.addEventListener('click', abrirFecharCadastrar);
+      });
     });
   </script>
 </body>
