@@ -11,7 +11,6 @@ if (isset($_POST['cadastrarTombamento'])) {
   $dataHora = $_POST['dataHora'];
   $prioridade = $_POST['prioridade'];
   $descricao = $_POST['descricao'];
-  $status = 1;
 
   $resultado = mysqli_query($conexao, "INSERT INTO tombamentos(tombamento_id, secretaria, tecnico, entrada, prioridade, descricao) VALUES ($id, '$secretaria', '$tecnico', '$dataHora', '$prioridade', '$descricao')");
 }
@@ -79,7 +78,10 @@ $resultadoTombamentos = $conexao->query($sqlExibir);
           <?php
           while ($tombamentosDados = mysqli_fetch_assoc($resultadoTombamentos)) {
             $prioridade = $tombamentosDados['prioridade']; // implementação para mudar a cor de prioridade, dependendo do que o técnico ter escolhido
-            $class = '';
+            $status = $tombamentosDados['status']; // mesma coisa, só que pra status
+            $classPrioridade = '';
+            $classStatus = '';
+
             echo "<tr>";
             echo "<th>".$tombamentosDados['tombamento_id']."</th>";
             echo "<td>".strtoupper($tombamentosDados['secretaria'])."</td>";
@@ -87,14 +89,21 @@ $resultadoTombamentos = $conexao->query($sqlExibir);
             echo "<td>".$tombamentosDados['entrada']."</td>";
             echo "<td>".$tombamentosDados['saida']."</td>";
             if ($prioridade === 'minima') {
-                $class = 'table-success'; 
+                $classPrioridade = 'table-success'; 
             } elseif ($prioridade === 'moderada') {
-                $class = 'table-warning';
+                $classPrioridade = 'table-warning';
             } elseif ($prioridade === 'maxima') {
-                $class = 'table-dark';
+                $classPrioridade = 'table-dark';
             }
-            echo "<td class=\"$class\">"."</td>";
-            echo "<td>".$tombamentosDados['status']."</td>";
+            echo "<td class=\"$classPrioridade\">"."</td>";
+            if ($status === 'ativo') {
+              $classStatus = 'spinner-grow text-success';
+            }
+            echo "<td>
+                    <div class=\"$classStatus\" role=\"status\">
+                        <span class=\"visually-hidden\">Loading...</span>
+                    </div>
+                  </td>";
             echo 
             '<td>
             <div class="acoes-tab">
