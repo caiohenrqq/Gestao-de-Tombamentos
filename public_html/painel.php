@@ -156,7 +156,7 @@ if (!empty($_GET['indice'])) {
       <!-- logout e add -->
       <div class="icons">
         <div class="cadastrar">
-          <a href="javascript:void(0);" onclick="cadastrar()">
+          <a id="cadastrar" href="javascript:void(0);">
             <img class="icon" src="assets/icons/add.svg" alt="adicionar" />
           </a>
         </div>
@@ -273,13 +273,7 @@ if (!empty($_GET['indice'])) {
 
     const janelaCadastrar = document.getElementById("janelaCadastrar"); // pega elemento janelaCadastrar
 
-    function cadastrar() {
-      dataHora.value = dataHoraAtual();
 
-      // se janelaCadastrar for TRUE, isto é, se ela existir, utiliza o elemento toggle para alternar entre ativo e desabilitado.
-      janelaCadastrar.classList.toggle("janelaCadastrar"); // off
-      janelaCadastrar.classList.toggle("janelaCadastrarAtivo"); // on
-    }
 
     function abrirFecharCadastrar() {
       janelaCadastrar.classList.toggle("janelaCadastrar"); // off 
