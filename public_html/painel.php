@@ -22,12 +22,22 @@ $resultadoTombamentos = $conexao->query($sqlExibir);
 // lógica para alterar dados dos tombamentos
 
 if (!empty($_GET['indice'])) {
-  $indice = $GET['indice'];
+  include_once('../config/conexao.php');
+  $indice = $_GET['indice'];
 
   $sqlSelecionarIndice = "SELECT * FROM tombamentos WHERE indice=$indice";
   $resultadoIndice = $conexao->query($sqlSelecionarIndice);
 
-  print_r($resultadoIndice);
+  if ($resultadoIndice -> num_rows > 0) {
+    $id = $_POST['id'];
+    $secretaria = $_POST['secretaria'];
+    $tecnico = $_POST['tecnico'];
+    $dataHora = $_POST['dataHora'];
+    $prioridade = $_POST['prioridade'];
+    $descricao = $_POST['descricao'];
+    $status = $_POST['status'];
+  }
+  
 }
 ?>
 
@@ -132,11 +142,12 @@ if (!empty($_GET['indice'])) {
                     </div>
                     <a>$textoStatus</a>
                   </td>";
+            //  
             echo 
             '<td>
             <div class="acoes-tab">
               <div class="editar">
-                <a class="editarBtns" href="#?indice='.$tombamentosDados['indice'].'">
+                <a class="editarBtns" href="#?indice=' . $tombamentosDados['indice'] . '">
                   <img class="icon" src="assets/icons/edit.svg" alt="editar" />
                 </a>
               </div>
@@ -152,6 +163,7 @@ if (!empty($_GET['indice'])) {
           ?>
         </tbody>
       </table>
+
       <!-- logout e add -->
       <div class="icons">
         <div class="cadastrar">
@@ -288,10 +300,17 @@ if (!empty($_GET['indice'])) {
       const retornarBtn = document.getElementById('retornar');
       const editarBtns = document.querySelectorAll('.editarBtns');  
       retornarBtn.addEventListener('click', abrirFecharCadastrar);
-      // querySelectorAll pega todos os elementos e guarda na nodelist, forEach itera sobre, onde irá retornar uma arrow function chamada btn que, para cada btn que encontrar, abrirá/fechará a tela de cadastro.
+      // querySelectorAll pega todos os elementos e guarda na nodelist (no navegador), forEach itera sobre, onde irá retornar uma arrow function chamada btn que, para cada btn que encontrar, abrirá/fechará a tela de cadastro.
       editarBtns.forEach(btn => {
         btn.addEventListener('click', abrirFecharCadastrar);
       });
+    });
+
+    // debug para editar
+    window.addEventListener('popstate', function(event) {
+    console.log("A URL  mudou para: " + document.location.href);
+    const params = new URLSearchParams(window.location.search);
+
     });
   </script>
 </body>
