@@ -25,7 +25,7 @@ if (!empty($_GET['indice'])) {
   include_once('../config/conexao.php');
   $indice = $_GET['indice'];
 
-  $sqlSelecionarIndice = "SELECT * FROM tombamentos WHERE indice=$indice";
+  $sqlSelecionarIndice = "SELECT * FROM tombamentos WHERE indice='$indice'";
   $resultadoIndice = $conexao->query($sqlSelecionarIndice);
 
   if ($resultadoIndice -> num_rows > 0) {
