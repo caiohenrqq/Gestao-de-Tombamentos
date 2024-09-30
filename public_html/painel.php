@@ -1,6 +1,7 @@
 <?php
 include 'protecao.php';
 include '../config/conexao.php';
+$atualizar = false;
 
 // lógica para pegar dados do formulário cadastro tombamentos e inserir no mysql
 if (isset($_POST['cadastrarTombamento'])) {
@@ -20,23 +21,58 @@ $sqlExibir = "SELECT * FROM tombamentos ORDER BY entrada DESC";  // pega tudo, i
 $resultadoTombamentos = $conexao->query($sqlExibir);
 
 // lógica para alterar dados dos tombamentos
-
-if (!empty($_GET['indice'])) {
-  include_once('../config/conexao.php');
+if (isset($_GET['indice'])) {
+  echo "Indice iniciado.";
   $indice = $_GET['indice'];
+  $selecionarDados = mysqli_query($conexao, "SELECT * FROM tombamentos WHERE indice=$indice");
 
-  $sqlSelecionarIndice = "SELECT * FROM tombamentos WHERE indice=$indice";
-  $resultadoIndice = $conexao->query($sqlSelecionarIndice);
+  if (mysqli_num_rows($selecionarDados) == 1) {
+    $dadosSQL = mysqli_fetch_array($selecionarDados); // dados sql é tipo o objeto tombamento que contém os dados do mesmo.
+    $indice = $dadosSQL['indice'];
+    $tombamento_id = $dadosSQL['tombamento_id'];
+    $secretaria = $dadosSQL['secretaria'];
+    $tecnico = $dadosSQL['tecnico'];
+    $entrada = $dadosSQL['entrada'];
+    $prioridade = $dadosSQL['prioridade'];
+    $descricao = $dadosSQL['descricao'];
+    $status = $dadosSQL['status'];
 
-  if ($resultadoIndice -> num_rows > 0) {
-    $id = $_POST['id'];
-    $secretaria = $_POST['secretaria'];
-    $tecnico = $_POST['tecnico'];
-    $dataHora = $_POST['dataHora'];
-    $prioridade = $_POST['prioridade'];
-    $descricao = $_POST['descricao'];
-    $status = $_POST['status'];
+    $atualizar = true;
   }
+}
+
+if(isset($_REQUEST['salvar'])){
+  echo "Salvar iniciado.";
+  $indice = $dadosSQL['indice'];
+  $tombamento_id = $dadosSQL['tombamento_id'];
+  $secretaria = $dadosSQL['secretaria'];
+  $tecnico = $dadosSQL['tecnico'];
+  $entrada = $dadosSQL['entrada'];
+  $prioridade = $dadosSQL['prioridade'];
+  $descricao = $dadosSQL['descricao'];
+  $status = $dadosSQL['status'];
+  mysqli_query($conexao, "INSERT INTO tombamentos(tombamento_id, secretaria, tecnico, entrada, prioridade, descricao, status) VALUES ($id, '$secretaria', '$tecnico', '$dataHora', '$prioridade', '$descricao', '$status')");
+  $_SESSION['msg'] = "Salvo.";
+  header("location:index.php");
+}
+
+if(isset($_REQUEST['atualizar'])){
+  echo "Atualizar iniciado.";
+  $indice = $dadosSQL['indice'];
+  $tombamento_id = $dadosSQL['tombamento_id'];
+  $secretaria = $dadosSQL['secretaria'];
+  $tecnico = $dadosSQL['tecnico'];
+  $entrada = $dadosSQL['dataHora'];
+  $prioridade = $dadosSQL['prioridade'];
+  $descricao = $dadosSQL['descricao'];
+  $status = $dadosSQL['status'];
+
+  mysqli_query($conexao, "UPDATE tombamentos 
+                          SET tombamento_id='$tombamento_id', secretaria='$secretaria', tecnico='$tecnico', entrada='$entrada', prioridade='$prioridade', descricao='$descricao', status='$status' 
+                          WHERE indice=$indice");
+  $_SESSION['msg']= "Atualizado.";
+  // isso aqui é necessário pra poder limpar o form 
+  header("location:index.php");
   
 }
 ?>
@@ -147,7 +183,7 @@ if (!empty($_GET['indice'])) {
             '<td>
             <div class="acoes-tab">
               <div class="editar">
-                <a class="editarBtns" href="#?indice=' . $tombamentosDados['indice'] . '">
+                <a class="editarBtns" href="painel.php?indice=' . $tombamentosDados['indice'] . '">
                   <img class="icon" src="assets/icons/edit.svg" alt="editar" />
                 </a>
               </div>
@@ -180,14 +216,22 @@ if (!empty($_GET['indice'])) {
       </div>
 
       <!-- sessão adicionar -->
-
+       
       <!-- nesta sessão, irá aparecer uma caixa que possibilitará a inserção de tombamentos -->
-      <div class="janelaCadastrar" id="janelaCadastrar">
+
+      <!-- se atualizar for true, então a caixa já mudará para ativo. -->
+      <?php
+      if ($atualizar) {
+        echo '<div class="janelaCadastrarAtivo" id="janelaCadastrar">';
+      } else {
+          echo '<div class="janelaCadastrar" id="janelaCadastrar">';
+      }
+      ?>
         <form action="painel.php" method="POST">
-          <div class="campoEntrada">
-            <label for="id">Tombamento</label>
-            <input type="text" id="id" name="id" />
-          </div>
+        <div class="campoEntrada">
+          <label for="id">Tombamento</label>
+          <input type="text" id="id" name="id" value="<?php echo isset($indice) ? $tombamento_id : ''; ?>" />
+        </div>
           <div class="campoEntrada">
             <label for="secretaria">Secretaria</label>
             <input placeholder="SEMURFH, SEMAD..." type="text" id="secretaria" name="secretaria" />
@@ -227,12 +271,22 @@ if (!empty($_GET['indice'])) {
           </div>
 
           <div class="btns">  
-            <input
-              type="submit"
-              name="cadastrarTombamento"
-              value="Cadastrar"
-              id="cadastrar"
-              class="btn btn-outline-dark"/>
+              <?php if($atualizar == true) { ?>
+                <input
+                type="submit"
+                name="atualizar"
+                value="Atualizar"
+                id="atualizar"
+                class="btn btn-outline-dark"/>
+              <?php } else { ?>
+                <input
+                type="submit"
+                name="cadastrarTombamento"
+                value="Cadastrar"
+                id="cadastrar"
+                class="btn btn-outline-dark"/>
+              <?php } ?>
+
             <input
               type="button"
               name="cadastrarTombamento"
@@ -304,13 +358,6 @@ if (!empty($_GET['indice'])) {
       editarBtns.forEach(btn => {
         btn.addEventListener('click', abrirFecharCadastrar);
       });
-    });
-
-    // debug para editar
-    window.addEventListener('popstate', function(event) {
-    console.log("A URL  mudou para: " + document.location.href);
-    const params = new URLSearchParams(window.location.search);
-
     });
   </script>
 </body>
