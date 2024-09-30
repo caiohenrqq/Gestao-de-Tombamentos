@@ -254,9 +254,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="campoEntrada">
           <label for="prioridade">Prioridade:</label>
           <select name="prioridade" id="prioridade">
-          <option value="minima" <?php echo (isset($indice) && $prioridade === 'minima') ? 'selected' : ''; ?>>Miníma</option>
-          <option value="moderada" <?php echo (isset($indice) && $prioridade === 'moderada') ? 'selected' : ''; ?>>Moderada</option>
-          <option value="maxima" <?php echo (isset($indice) && $prioridade === 'maxima') ? 'selected' : ''; ?>>Máxima</option>
+            <!-- explicação deu so de $dadosSQL['prioridade'] logo abaixo -->
+          <option value="minima" <?php echo (isset($indice) && $dadosSQL['prioridade'] === 'minima') ? 'selected' : ''; ?>>Miníma</option>
+          <option value="moderada" <?php echo (isset($indice) && $dadosSQL['prioridade']=== 'moderada') ? 'selected' : ''; ?>>Moderada</option>
+          <option value="maxima" <?php echo (isset($indice) && $dadosSQL['prioridade'] === 'maxima') ? 'selected' : ''; ?>>Máxima</option>
       </select>
         </div>
         <div class="campoEntrada">
@@ -364,7 +365,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           cadastrarBtn.addEventListener('click', abrirFecharCadastrar);
         }
       }
-
 
       const retornarBtn = document.getElementById('retornar');
       const editarBtns = document.querySelectorAll('.editarBtns');
