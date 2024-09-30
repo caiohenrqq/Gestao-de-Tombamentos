@@ -151,13 +151,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "<td>" . $tombamentosDados['entrada'] . "</td>";
             echo "<td>" . $tombamentosDados['saida'] . "</td>";
             if ($prioridade === 'minima') {
-              $classPrioridade = 'corPrioridadeMinima';
+              $classPrioridade = 'spinner-grow spinner-grow-sm text-success pararAnimacao';
             } elseif ($prioridade === 'moderada') {
-              $classPrioridade = 'corPrioridadeModerada';
+              $classPrioridade = 'spinner-grow spinner-grow-sm text-warning';
             } elseif ($prioridade === 'maxima') {
-              $classPrioridade = 'corPrioridadeMaxima';
+              $classPrioridade = 'spinner-grow spinner-grow-sm text-danger';
             }
-            echo "<td class=\"$classPrioridade\"></td>";
+            echo "<td>
+                    <div class=\"$classPrioridade\" role=\"status\" >
+                      <span class=\"visually-hidden\">Loading...</span>
+                    </div>
+                  </td>";
             if ($status === 'finalizado') {
               $textoStatus = "| Finalizado";
               $classStatus = 'spinner-grow spinner-grow-sm text-success pararAnimacao';
@@ -182,7 +186,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     <a>$textoStatus</a>
                   </td>";
-            //  
             echo
             '<td>
             <div class="acoes-tab">
@@ -264,11 +267,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <label for="status">Status</label>
           <select name="status" id="status">
           <!-- nao sei pq krlhos simplesmente $status nao funciona, mas $dadosSQL['status'] funciona, entao seguimos o baile. mas caso eu va refatorar dps, provavelmente tem algo a ver com escopo da função que recebe os dados, pois eles estao vindo com sucesso do sql. -->
-            <option value="avaliando" <?php echo (isset($indice) && $dadosSQL['status'] === 'avaliando') ? 'selected' : ''; ?>>Avaliando</option>
-            <option value="estragado" <?php echo (isset($indice) && $dadosSQL['status'] === 'estragado') ? 'selected' : ''; ?>>Estragado</option>
-            <option value="consertando" <?php echo (isset($indice) && $dadosSQL['status'] === 'consertando') ? 'selected' : ''; ?>>Consertando</option>
-            <option value="aguardando_entrega" <?php echo (isset($indice) && $dadosSQL['status'] === 'aguardando_entrega') ? 'selected' : ''; ?>>Aguardando Entrega</option>
-            <option value="finalizado" <?php echo (isset($indice) && $dadosSQL['status'] === 'finalizado') ? 'selected' : ''; ?>>Finalizado</option>
+            <option value="avaliando" 
+            <?php echo (isset($indice) && $dadosSQL['status'] === 'avaliando') ? 'selected' : ''; ?>>Avaliando</option>
+            <option value="estragado" 
+            <?php echo (isset($indice) && $dadosSQL['status'] === 'estragado') ? 'selected' : ''; ?>>Estragado</option>
+            <option value="consertando" 
+            <?php echo (isset($indice) && $dadosSQL['status'] === 'consertando') ? 'selected' : ''; ?>>Consertando</option>
+            <option value="aguardando_entrega" 
+            <?php echo (isset($indice) && $dadosSQL['status'] === 'aguardando_entrega') ? 'selected' : ''; ?>>Aguardando Entrega</option>
+            <option value="finalizado" 
+            <?php echo (isset($indice) && $dadosSQL['status'] === 'finalizado') ? 'selected' : ''; ?>>Finalizado</option>
           </select>
         </div>
 
