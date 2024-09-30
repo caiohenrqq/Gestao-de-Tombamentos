@@ -22,9 +22,9 @@ $resultadoTombamentos = $conexao->query($sqlExibir);
 
 // lógica para alterar dados dos tombamentos
 if (isset($_GET['indice'])) {
-  echo "Indice iniciado.";
   $indice = $_GET['indice'];
   $selecionarDados = mysqli_query($conexao, "SELECT * FROM tombamentos WHERE indice=$indice");
+  $atualizar = true;
 
   if (mysqli_num_rows($selecionarDados) == 1) {
     $dadosSQL = mysqli_fetch_array($selecionarDados); // dados sql é tipo o objeto tombamento que contém os dados do mesmo.
@@ -36,12 +36,10 @@ if (isset($_GET['indice'])) {
     $prioridade = $dadosSQL['prioridade'];
     $descricao = $dadosSQL['descricao'];
     $status = $dadosSQL['status'];
-
-    $atualizar = true;
   }
 }
 
-if(isset($_REQUEST['salvar'])){
+if (isset($_REQUEST['salvar'])) {
   echo "Salvar iniciado.";
   $indice = $dadosSQL['indice'];
   $tombamento_id = $dadosSQL['tombamento_id'];
@@ -56,7 +54,7 @@ if(isset($_REQUEST['salvar'])){
   header("location:index.php");
 }
 
-if(isset($_REQUEST['atualizar'])){
+if (isset($_REQUEST['atualizar'])) {
   echo "Atualizar iniciado.";
   $indice = $dadosSQL['indice'];
   $tombamento_id = $dadosSQL['tombamento_id'];
@@ -70,10 +68,15 @@ if(isset($_REQUEST['atualizar'])){
   mysqli_query($conexao, "UPDATE tombamentos 
                           SET tombamento_id='$tombamento_id', secretaria='$secretaria', tecnico='$tecnico', entrada='$entrada', prioridade='$prioridade', descricao='$descricao', status='$status' 
                           WHERE indice=$indice");
-  $_SESSION['msg']= "Atualizado.";
+  $_SESSION['msg'] = "Atualizado.";
   // isso aqui é necessário pra poder limpar o form 
   header("location:index.php");
-  
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  if (isset($_POST['retornar'])) {
+    // po nao faço ideia do pq rola isso mas era pra ter um header painel.php aqui pra limpar a url, mas aparentemente já faz isso msm sem header, apenas com submit, vou deixar aqui pq foi bem engraçado.
+  }
 }
 ?>
 
@@ -96,18 +99,19 @@ if(isset($_REQUEST['atualizar'])){
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 </head>
-<body>
-<style>
-        .table-borderless th, 
-        .table-borderless td {
-            border-bottom: 1px solid #ccc;
-        }
 
-        .table-borderless th,
-        .table-borderless td {
-            padding-bottom: 5px;
-        }
-    </style>
+<body>
+  <style>
+    .table-borderless th,
+    .table-borderless td {
+      border-bottom: 1px solid #ccc;
+    }
+
+    .table-borderless th,
+    .table-borderless td {
+      padding-bottom: 5px;
+    }
+  </style>
   <section class="painel-section bg-dark">
     <div class="bem-vindo">
       <div>
@@ -141,17 +145,17 @@ if(isset($_REQUEST['atualizar'])){
             $corPrioridade = '';
 
             echo "<tr>";
-            echo "<th>".$tombamentosDados['tombamento_id']."</th>";
-            echo "<td>".strtoupper($tombamentosDados['secretaria'])."</td>";
-            echo "<td>".ucfirst($tombamentosDados['tecnico'])."</td>";
-            echo "<td>".$tombamentosDados['entrada']."</td>";
-            echo "<td>".$tombamentosDados['saida']."</td>";
+            echo "<th>" . $tombamentosDados['tombamento_id'] . "</th>";
+            echo "<td>" . strtoupper($tombamentosDados['secretaria']) . "</td>";
+            echo "<td>" . ucfirst($tombamentosDados['tecnico']) . "</td>";
+            echo "<td>" . $tombamentosDados['entrada'] . "</td>";
+            echo "<td>" . $tombamentosDados['saida'] . "</td>";
             if ($prioridade === 'minima') {
-                $classPrioridade = 'corPrioridadeMinima'; 
+              $classPrioridade = 'corPrioridadeMinima';
             } elseif ($prioridade === 'moderada') {
-                $classPrioridade = 'corPrioridadeModerada';
+              $classPrioridade = 'corPrioridadeModerada';
             } elseif ($prioridade === 'maxima') {
-                $classPrioridade = 'corPrioridadeMaxima';
+              $classPrioridade = 'corPrioridadeMaxima';
             }
             echo "<td class=\"$classPrioridade\"></td>";
             if ($status === 'finalizado') {
@@ -169,7 +173,7 @@ if(isset($_REQUEST['atualizar'])){
             } elseif ($status === 'aguardando_entrega') {
               $textoStatus = "| Aguardando Entrega";
               $classStatus = 'spinner-grow spinner-grow-sm text-warning';
-            } 
+            }
             // aqui ele vai receber dependendo da lógica, a classe de classStatus, e no style a gente altera a velocidade da bolinha.
             // a classe **pararAnimacao**, para a animação do bootstrap e mantém o transform em scale(1), mostrando todo seu tamanho.
             echo "<td style='text-align: left;'>
@@ -179,7 +183,7 @@ if(isset($_REQUEST['atualizar'])){
                     <a>$textoStatus</a>
                   </td>";
             //  
-            echo 
+            echo
             '<td>
             <div class="acoes-tab">
               <div class="editar">
@@ -216,7 +220,7 @@ if(isset($_REQUEST['atualizar'])){
       </div>
 
       <!-- sessão adicionar -->
-       
+
       <!-- nesta sessão, irá aparecer uma caixa que possibilitará a inserção de tombamentos -->
 
       <!-- se atualizar for true, então a caixa já mudará para ativo. -->
@@ -224,80 +228,78 @@ if(isset($_REQUEST['atualizar'])){
       if ($atualizar) {
         echo '<div class="janelaCadastrarAtivo" id="janelaCadastrar">';
       } else {
-          echo '<div class="janelaCadastrar" id="janelaCadastrar">';
+        echo '<div class="janelaCadastrar" id="janelaCadastrar">';
       }
       ?>
-        <form action="painel.php" method="POST">
+      <form action="painel.php" method="POST">
         <div class="campoEntrada">
           <label for="id">Tombamento</label>
           <input type="text" id="id" name="id" value="<?php echo isset($indice) ? $tombamento_id : ''; ?>" />
         </div>
-          <div class="campoEntrada">
-            <label for="secretaria">Secretaria</label>
-            <input placeholder="SEMURFH, SEMAD..." type="text" id="secretaria" name="secretaria" />
-          </div>
-          <div class="campoEntrada">
-            <label for="tecnico">Técnico</label>
-            <input type="text" id="tecnico" name="tecnico" />
-          </div>    
-          <div class="campoEntrada">
-            <label for="dataHora">Entrada (DD-MM-AAAA)</label>
-            <input class="dataHora" type="datetime-local" id="dataHora" name="dataHora" />
-          </div>
+        <div class="campoEntrada">
+          <label for="secretaria">Secretaria</label>
+          <input placeholder="SEMURFH, SEMAD..." type="text" id="secretaria" name="secretaria" value="<?php echo isset($indice) ? $secretaria : ''; ?>" />
+        </div>
+        <div class="campoEntrada">
+          <label for="tecnico">Técnico</label>
+          <input type="text" id="tecnico" name="tecnico" value="<?php echo isset($indice) ? $tecnico : ''; ?>" />
+        </div>
+        <div class="campoEntrada">
+          <label for="dataHora">Entrada (DD-MM-AAAA)</label>
+          <input class="dataHora" type="datetime-local" id="dataHora" name="dataHora" value="<?php echo isset($indice) ? $dataHora : ''; ?>" />
+        </div>
+        <div class="campoEntrada">
+          <label for="prioridade">Prioridade:</label>
+          <select name="prioridade" id="prioridade">
+          <option value="minima" <?php echo (isset($indice) && $prioridade === 'minima') ? 'selected' : ''; ?>>Miníma</option>
+          <option value="moderada" <?php echo (isset($indice) && $prioridade === 'moderada') ? 'selected' : ''; ?>>Moderada</option>
+          <option value="maxima" <?php echo (isset($indice) && $prioridade === 'maxima') ? 'selected' : ''; ?>>Máxima</option>
+      </select>
+        </div>
+        <div class="campoEntrada">
+          <label for="descricao">Descrição</label>
+          <input placeholder="Computador Lenovo com problema no HD..." type="text" id="descricao" name="descricao" value="<?php echo isset($indice) ? $descricao : ''; ?>" />
+        </div>
+        <div class="campoEntrada">
+          <label for="status">Status</label>
+          <select name="status" id="status">
+          <!-- nao sei pq krlhos simplesmente $status nao funciona, mas $dadosSQL['status'] funciona, entao seguimos o baile. mas caso eu va refatorar dps, provavelmente tem algo a ver com escopo da função que recebe os dados, pois eles estao vindo com sucesso do sql. -->
+            <option value="avaliando" <?php echo (isset($indice) && $dadosSQL['status'] === 'avaliando') ? 'selected' : ''; ?>>Avaliando</option>
+            <option value="estragado" <?php echo (isset($indice) && $dadosSQL['status'] === 'estragado') ? 'selected' : ''; ?>>Estragado</option>
+            <option value="consertando" <?php echo (isset($indice) && $dadosSQL['status'] === 'consertando') ? 'selected' : ''; ?>>Consertando</option>
+            <option value="aguardando_entrega" <?php echo (isset($indice) && $dadosSQL['status'] === 'aguardando_entrega') ? 'selected' : ''; ?>>Aguardando Entrega</option>
+            <option value="finalizado" <?php echo (isset($indice) && $dadosSQL['status'] === 'finalizado') ? 'selected' : ''; ?>>Finalizado</option>
+          </select>
+        </div>
 
-          <div class="campoEntrada">  
-            <label for="prioridade">Prioridade:</label>
-            <select name="prioridade" id="prioridade">
-              <option value="minima">Miníma</option>
-              <option value="moderada">Moderada</option>
-              <option value="maxima">Máxima</option>
-            </select>
-          </div>
-
-          <div class="campoEntrada">
-            <label for="descricao">Descrição</label>
-            <input placeholder="Computador Lenovo com problema no HD..." type="text" id="descricao" name="descricao" />
-          </div>
-          
-          <div class="campoEntrada">
-            <label for="status">Status</label>
-            <select name="status" id="status">
-              <option value="avaliando">Avaliando</option>
-              <option value="estragado">Estragado</option>
-              <option value="consertando">Consertando</option>
-              <option value="aguardando_entrega">Aguardando Entrega</option>
-              <option value="finalizado">Finalizado</option>
-            </select>
-          </div>
-
-          <div class="btns">  
-              <?php if($atualizar == true) { ?>
-                <input
-                type="submit"
-                name="atualizar"
-                value="Atualizar"
-                id="atualizar"
-                class="btn btn-outline-dark"/>
-              <?php } else { ?>
-                <input
-                type="submit"
-                name="cadastrarTombamento"
-                value="Cadastrar"
-                id="cadastrar"
-                class="btn btn-outline-dark"/>
-              <?php } ?>
-
+        <div class="btns">
+          <?php if ($atualizar == true) { ?>
             <input
-              type="button"
+              type="submit"
+              name="atualizar"
+              value="Atualizar"
+              id="atualizar"
+              class="btn btn-outline-dark" />
+          <?php } else { ?>
+            <input
+              type="submit"
               name="cadastrarTombamento"
-              value="Retornar"
-              id="retornar"
-              class="btn btn-outline-dark"/>
-          </div>
-        </form>
-      </div>
+              value="Cadastrar"
+              id="cadastrar"
+              class="btn btn-outline-dark" />
+          <?php } ?>
 
-      <hr class="linha" />
+          <input
+            type="submit"
+            name="retornar"
+            value="Retornar"
+            id="retornar"
+            class="btn btn-outline-dark" />
+        </div>
+      </form>
+    </div>
+
+    <hr class="linha" />
 
     </div>
   </section>
@@ -314,7 +316,7 @@ if(isset($_REQUEST['atualizar'])){
       placeholderValue: 'Qual a prioridade?',
       itemSelectText: '',
     });
-    
+
     const status = document.getElementById('status'); // Choices.js
     const statusChoices = new Choices(status, {
       removeItemButton: true,
@@ -350,9 +352,9 @@ if(isset($_REQUEST['atualizar'])){
         dataHora.value = dataHoraAtual();
         cadastrarBtn.addEventListener('click', abrirFecharCadastrar);
       }
-      
+
       const retornarBtn = document.getElementById('retornar');
-      const editarBtns = document.querySelectorAll('.editarBtns');  
+      const editarBtns = document.querySelectorAll('.editarBtns');
       retornarBtn.addEventListener('click', abrirFecharCadastrar);
       // querySelectorAll pega todos os elementos e guarda na nodelist (no navegador), forEach itera sobre, onde irá retornar uma arrow function chamada btn que, para cada btn que encontrar, abrirá/fechará a tela de cadastro.
       editarBtns.forEach(btn => {
