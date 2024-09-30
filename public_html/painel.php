@@ -1,7 +1,7 @@
 <?php
 include 'protecao.php';
 include '../config/conexao.php';
-$atualizar = false;
+$update = false;
 
 // lógica para pegar dados do formulário cadastro tombamentos e inserir no mysql
 if (isset($_POST['cadastrarTombamento'])) {
@@ -24,8 +24,9 @@ $resultadoTombamentos = $conexao->query($sqlExibir);
 if (isset($_GET['indice'])) {
   $indice = $_GET['indice'];
   
-  $selecionarDados = mysqli_query($conexao, "SELECT * FROM tombamentos WHERE indice=$indice");
-  $atualizar = true;
+  $selecionarDados = mysqli_query($conexao, "SELECT * FROM tombamentos WHERE indice=$indice") or die(mysqli_error($conexao));
+
+  $update = true;
 
   if (mysqli_num_rows($selecionarDados) == 1) {
     $dadosSQL = mysqli_fetch_array($selecionarDados); // dados sql é tipo o objeto tombamento que contém os dados do mesmo.
@@ -40,21 +41,8 @@ if (isset($_GET['indice'])) {
   }
 }
 
-// if (isset($_REQUEST['salvar'])) {
-//   echo "Salvar iniciado.";
-//   $indice = $dadosSQL['indice'];
-//   $tombamento_id = $dadosSQL['id'];
-//   $secretaria = $dadosSQL['secretaria'];
-//   $tecnico = $dadosSQL['tecnico'];
-//   $entrada = $dadosSQL['entrada'];
-//   $prioridade = $dadosSQL['prioridade'];
-//   $descricao = $dadosSQL['descricao'];
-//   $status = $dadosSQL['status'];
-//   mysqli_query($conexao, "INSERT INTO tombamentos(tombamento_id, secretaria, tecnico, entrada, prioridade, descricao, status) VALUES ('$tombamento_id', '$secretaria', '$tecnico', '$dataHora', '$prioridade', '$descricao', '$status')");
-//   header("location:index.php");
-// }
-
 if (isset($_POST['atualizar'])) {
+  $indice = $_POST['indice']; // meu deus isso aqui foi a coisa mais dificl de fazer funcionar na minha vida, quando voce dava submit o valor indice saia da url meu deus que aflição
   $tombamento_id = $_POST['id'];
   $secretaria = $_POST['secretaria'];
   $tecnico = $_POST['tecnico'];
@@ -63,12 +51,11 @@ if (isset($_POST['atualizar'])) {
   $descricao = $_POST['descricao'];
   $status = $_POST['status'];
 
-  $query = "UPDATE tombamentos 
-  SET tombamento_id='$tombamento_id', secretaria='$secretaria', tecnico='$tecnico', entrada='$entrada', prioridade='$prioridade', descricao='$descricao', status='$status' 
-  WHERE tombamento_id='$tombamento_id'";
+  $query = "UPDATE tombamentos SET tombamento_id='$tombamento_id', secretaria='$secretaria', tecnico='$tecnico', entrada='$entrada', prioridade='$prioridade', descricao='$descricao', status='$status' WHERE indice='$indice'";
 
-  // isso aqui é necessário pra poder limpar o form 
+  $resultado = mysqli_query($conexao, $query) or die(mysqli_error($conexao));
 
+  header("Location: painel.php");
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -224,9 +211,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <!-- nesta sessão, irá aparecer uma caixa que possibilitará a inserção e edição de tombamentos -->
 
-      <!-- se atualizar for true, então a caixa já mudará para ativo. -->
+      <!-- se update for true, então a caixa já mudará para ativo. -->
       <?php
-      if ($atualizar) {
+      if ($update) {
         echo '<div class="janelaCadastrarAtivo" id="janelaCadastrar">';
       } else {
         echo '<div class="janelaCadastrar" id="janelaCadastrar">';
@@ -280,13 +267,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <div class="btns">
-          <?php if ($atualizar == true) { ?>
-            <input
-              type="submit"
-              name="atualizar"
-              value="Atualizar"
-              id="atualizar"
-              class="btn btn-outline-dark" />
+          <?php if ($update == true) { ?>
+            <input type="submit" name="atualizar" value="Atualizar" id="atualizar" class="btn btn-outline-dark" />
+            <!-- quando da submit (clica no botao atualizar, pega o valor $indice que esta armzenado no php e armazena no value desse input escondido, e após, joga ele na lógica de atualizar (linha 44) -->
+            <input type="hidden" name="indice" value="<?php echo $indice; ?>">
           <?php } else { ?>
             <input
               type="submit"
@@ -357,11 +341,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       const cadastrarBtn = document.getElementById('cadastrar');
       if(window.location.href.indexOf("painel.php?indice=") > -1) {
         if (cadastrarBtn) {
-        cadastrarBtn.addEventListener('click', abrirFecharCadastrar);
-      } else {
-          dataHora.value = dataHoraAtual();
           cadastrarBtn.addEventListener('click', abrirFecharCadastrar);
         }
+      } else {
+        dataHora.value = dataHoraAtual();
+        cadastrarBtn.addEventListener('click', abrirFecharCadastrar);
       }
 
       const retornarBtn = document.getElementById('retornar');
@@ -372,9 +356,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         btn.addEventListener('click', abrirFecharCadastrar);
       });
     });
-      if(window.location.href.indexOf("painel.php?indice=") > -1) {
-        
-      }
   </script>
 </body>
 
