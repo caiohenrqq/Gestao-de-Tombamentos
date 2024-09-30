@@ -23,6 +23,7 @@ $resultadoTombamentos = $conexao->query($sqlExibir);
 // lógica para alterar dados dos tombamentos
 if (isset($_GET['indice'])) {
   $indice = $_GET['indice'];
+  
   $selecionarDados = mysqli_query($conexao, "SELECT * FROM tombamentos WHERE indice=$indice");
   $atualizar = true;
 
@@ -39,38 +40,35 @@ if (isset($_GET['indice'])) {
   }
 }
 
-if (isset($_REQUEST['salvar'])) {
-  echo "Salvar iniciado.";
-  $indice = $dadosSQL['indice'];
-  $tombamento_id = $dadosSQL['tombamento_id'];
-  $secretaria = $dadosSQL['secretaria'];
-  $tecnico = $dadosSQL['tecnico'];
-  $entrada = $dadosSQL['entrada'];
-  $prioridade = $dadosSQL['prioridade'];
-  $descricao = $dadosSQL['descricao'];
-  $status = $dadosSQL['status'];
-  mysqli_query($conexao, "INSERT INTO tombamentos(tombamento_id, secretaria, tecnico, entrada, prioridade, descricao, status) VALUES ($id, '$secretaria', '$tecnico', '$dataHora', '$prioridade', '$descricao', '$status')");
-  $_SESSION['msg'] = "Salvo.";
-  header("location:index.php");
-}
+// if (isset($_REQUEST['salvar'])) {
+//   echo "Salvar iniciado.";
+//   $indice = $dadosSQL['indice'];
+//   $tombamento_id = $dadosSQL['id'];
+//   $secretaria = $dadosSQL['secretaria'];
+//   $tecnico = $dadosSQL['tecnico'];
+//   $entrada = $dadosSQL['entrada'];
+//   $prioridade = $dadosSQL['prioridade'];
+//   $descricao = $dadosSQL['descricao'];
+//   $status = $dadosSQL['status'];
+//   mysqli_query($conexao, "INSERT INTO tombamentos(tombamento_id, secretaria, tecnico, entrada, prioridade, descricao, status) VALUES ('$tombamento_id', '$secretaria', '$tecnico', '$dataHora', '$prioridade', '$descricao', '$status')");
+//   header("location:index.php");
+// }
 
-if (isset($_REQUEST['atualizar'])) {
-  echo "Atualizar iniciado.";
-  $indice = $dadosSQL['indice'];
-  $tombamento_id = $dadosSQL['tombamento_id'];
-  $secretaria = $dadosSQL['secretaria'];
-  $tecnico = $dadosSQL['tecnico'];
-  $entrada = $dadosSQL['dataHora'];
-  $prioridade = $dadosSQL['prioridade'];
-  $descricao = $dadosSQL['descricao'];
-  $status = $dadosSQL['status'];
+if (isset($_POST['atualizar'])) {
+  $tombamento_id = $_POST['id'];
+  $secretaria = $_POST['secretaria'];
+  $tecnico = $_POST['tecnico'];
+  $entrada = $_POST['dataHora'];
+  $prioridade = $_POST['prioridade'];
+  $descricao = $_POST['descricao'];
+  $status = $_POST['status'];
 
-  mysqli_query($conexao, "UPDATE tombamentos 
-                          SET tombamento_id='$tombamento_id', secretaria='$secretaria', tecnico='$tecnico', entrada='$entrada', prioridade='$prioridade', descricao='$descricao', status='$status' 
-                          WHERE indice=$indice");
-  $_SESSION['msg'] = "Atualizado.";
+  $query = "UPDATE tombamentos 
+  SET tombamento_id='$tombamento_id', secretaria='$secretaria', tecnico='$tecnico', entrada='$entrada', prioridade='$prioridade', descricao='$descricao', status='$status' 
+  WHERE tombamento_id='$tombamento_id'";
+
   // isso aqui é necessário pra poder limpar o form 
-  header("location:index.php");
+
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
