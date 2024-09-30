@@ -224,7 +224,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <!-- sessão adicionar -->
 
-      <!-- nesta sessão, irá aparecer uma caixa que possibilitará a inserção de tombamentos -->
+      <!-- nesta sessão, irá aparecer uma caixa que possibilitará a inserção e edição de tombamentos -->
 
       <!-- se atualizar for true, então a caixa já mudará para ativo. -->
       <?php
@@ -249,7 +249,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <div class="campoEntrada">
           <label for="dataHora">Entrada (DD-MM-AAAA)</label>
-          <input class="dataHora" type="datetime-local" id="dataHora" name="dataHora" value="<?php echo isset($indice) ? $dataHora : ''; ?>" />
+          <input class="dataHora" type="datetime-local" id="dataHora" name="dataHora" value="<?php echo isset($indice) ? $dadosSQL['entrada'] : ''; ?>" />
         </div>
         <div class="campoEntrada">
           <label for="prioridade">Prioridade:</label>
@@ -356,10 +356,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // adiciona ouvinte de evento para quando o usuário clicar, retornar a funçao
     window.addEventListener('DOMContentLoaded', function() {
       const cadastrarBtn = document.getElementById('cadastrar');
-      if (cadastrarBtn) {
-        dataHora.value = dataHoraAtual();
+      if(window.location.href.indexOf("painel.php?indice=") > -1) {
+        if (cadastrarBtn) {
         cadastrarBtn.addEventListener('click', abrirFecharCadastrar);
+      } else {
+          dataHora.value = dataHoraAtual();
+          cadastrarBtn.addEventListener('click', abrirFecharCadastrar);
+        }
       }
+
 
       const retornarBtn = document.getElementById('retornar');
       const editarBtns = document.querySelectorAll('.editarBtns');
@@ -369,6 +374,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         btn.addEventListener('click', abrirFecharCadastrar);
       });
     });
+      if(window.location.href.indexOf("painel.php?indice=") > -1) {
+        
+      }
   </script>
 </body>
 
