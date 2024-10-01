@@ -350,7 +350,6 @@
     position: absolute;
     width: 40rem;
     text-align: left;
-
     z-index: 1000;
     height: auto;
     border-width: 1px;
@@ -390,15 +389,47 @@
     --bs-spinner-animation-speed: 3s !important;
   }
 
-  .corPrioridadeModerada {
-    background-color: yellow !important;
+  .janelaConfirmacao {
+    display: none;
   }
 
-  .corPrioridadeMinima {
-    background-color: green !important;
+  .janelaConfirmacaoAtivo {
+    display: inline;
+    font-size: 1.5rem;
+    position: fixed;
+    width: 25rem;
+    height: 20rem;
+    border-width: 1px;
+    border-radius: 8%;
+    border-style: solid;
+    border-color: var(--corBorda);
+    padding: 20px;
+    background-color: var(--corBox);
+    gap: 1rem;
+    
+    /* flexbox */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centraliza verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+    text-align: center; /* Centraliza o texto */
+    
+    /* Centralização no viewport */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
-  .corPrioridadeMaxima {
-    background-color: red !important;
+  .janelaConfirmacaoAtivo h1 {
+    font-size: 2rem;
   }
+
+  .janelaConfirmacaoAtivo p {
+    font-size: 1rem;
+  }
+
+  .btnsConfirmacao {
+    flex-direction: row;
+  }
+
 

@@ -63,6 +63,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // po nao faço ideia do pq rola isso mas era pra ter um header painel.php aqui pra limpar a url, mas aparentemente já faz isso msm sem header, apenas com submit, vou deixar aqui pq foi bem engraçado.
   }
 }
+
+if (isset($_POST[''])) {
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -180,7 +184,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </a>
               </div>
               <div class="remover">
-                <a href="logout.php">
+                <a class="removerBtns" href="painel.php?remover='. $tombamentosDados['indice'] .'">
                   <img class="icon" src="assets/icons/remove.svg" alt="remover" />
                 </a>
               </div>
@@ -206,11 +210,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           </a>
         </div>
       </div>
-
+      <!-- sessão deletar -->
+      <div id="janelaConfirmacao" class="janelaConfirmacao">
+            <h1>Tem certeza?</h1>
+            <p>Quer mesmo remover o tombamento X?</p> <!-- X será o tombamento_id --> 
+            <div class="btnsConfirmacao">
+              <button id="btnConfirmarConfirmacao" class="btn btn-outline-dark">
+                Confirmar
+              </button>
+              <button id="btnRetornarConfirmacao" class="btn btn-outline-dark">
+                Retornar
+              </button>
+            </div>
+      </div>
       <!-- sessão adicionar -->
-
       <!-- nesta sessão, irá aparecer uma caixa que possibilitará a inserção e edição de tombamentos -->
-
       <!-- se update for true, então a caixa já mudará para ativo. -->
       <?php
       if ($update) {
@@ -330,16 +344,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     const janelaCadastrar = document.getElementById("janelaCadastrar"); // pega elemento janelaCadastrar
+    const janelaConfirmacao = document.getElementById("janelaConfirmacao");
 
     function abrirFecharCadastrar() {
       janelaCadastrar.classList.toggle("janelaCadastrar"); // off 
       janelaCadastrar.classList.toggle("janelaCadastrarAtivo"); // on
     }
 
+    function abrirFecharTelaConfirmacao() {
+      janelaConfirmacao.classList.toggle("janelaConfirmacao");
+      janelaConfirmacao.classList.toggle("janelaConfirmacaoAtivo");
+    }
+
     // adiciona ouvinte de evento para quando o usuário clicar, retornar a funçao
     window.addEventListener('DOMContentLoaded', function() {
+      const removerBtns = document.querySelectorAll('.removerBtns');
       const cadastrarBtn = document.getElementById('cadastrar');
-      if(window.location.href.indexOf("painel.php?indice=") > -1) {
+
+      if (window.location.href.indexOf("painel.php?indice=") > -1) {
         if (cadastrarBtn) {
           cadastrarBtn.addEventListener('click', abrirFecharCadastrar);
         }
@@ -347,9 +369,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         dataHora.value = dataHoraAtual();
         cadastrarBtn.addEventListener('click', abrirFecharCadastrar);
       }
+      
+      if (window.location.href.indexOf("painel.php?remover=") > -1) {
+        abrirFecharTelaConfirmacao();
+      } else {
+        console.log("Botão remover não foi pressionado!");
+      }
 
       const retornarBtn = document.getElementById('retornar');
       const editarBtns = document.querySelectorAll('.editarBtns');
+
       retornarBtn.addEventListener('click', abrirFecharCadastrar);
       // querySelectorAll pega todos os elementos e guarda na nodelist (no navegador), forEach itera sobre, onde irá retornar uma arrow function chamada btn que, para cada btn que encontrar, abrirá/fechará a tela de cadastro.
       editarBtns.forEach(btn => {
