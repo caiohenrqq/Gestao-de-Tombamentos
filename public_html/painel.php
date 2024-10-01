@@ -225,7 +225,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
       </div>
       <!-- sessão deletar -->
-       <!-- posso futuramente colocar uma UI pra confirmar a exclusão, mas no momento não é prioridade -->
+       <!-- posso futuramente colocar uma HUD pra confirmar a exclusão, mas no momento não é prioridade -->
         <div id="janelaConfirmacao" class="janelaConfirmacao">
               <h1>Tem certeza?</h1>
               <p>Quer mesmo remover o tombamento ?</p>

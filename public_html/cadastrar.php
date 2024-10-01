@@ -17,7 +17,7 @@
   <!-- sessão de login -->
   <section class="cadastrar-section bg-dark">
     <div class="cadastrar-box">
-      <form action="/autenticacao.php" method="POST">
+      <form action="autenticacao.php" method="POST">
         <input type="text" maxlength="10" required id="username" placeholder="identificação" name="username">
         <input type="password" required id="senha" placeholder="senha" name="senha">
         <input type="email" required id="email" placeholder="e-mail" name="email">
