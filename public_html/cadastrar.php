@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <!-- sessão de login -->
+  <!-- sessão de cadastro/voltar -->
   <section class="cadastrar-section bg-dark">
     <div class="cadastrar-box">
       <form action="autenticacao.php" method="POST">
@@ -26,6 +26,7 @@
       </form>
     </div>
   </section>
+
 </body>
 
 </html>

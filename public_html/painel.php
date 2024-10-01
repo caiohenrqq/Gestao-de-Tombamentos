@@ -219,7 +219,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <div class="logout">
-          <a href="/logout.php">
+          <a href="logout.php">
             <img class="icon" src="assets/icons/logout.svg" alt="deslogar" />
           </a>
         </div>
