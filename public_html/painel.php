@@ -211,18 +211,27 @@ if (isset($_POST[''])) {
         </div>
       </div>
       <!-- sessão deletar -->
-      <div id="janelaConfirmacao" class="janelaConfirmacao">
-            <h1>Tem certeza?</h1>
-            <p>Quer mesmo remover o tombamento X?</p> <!-- X será o tombamento_id --> 
-            <div class="btnsConfirmacao">
-              <button id="btnConfirmarConfirmacao" class="btn btn-outline-dark">
-                Confirmar
-              </button>
-              <button id="btnRetornarConfirmacao" class="btn btn-outline-dark">
-                Retornar
-              </button>
-            </div>
-      </div>
+      <form action="">
+        <div id="janelaConfirmacao" class="janelaConfirmacao">
+              <h1>Tem certeza?</h1>
+              <p>Quer mesmo remover o tombamento X?</p> <!-- X será o tombamento_id --> 
+              <div class="btnsConfirmacao">
+              <input
+                type="submit"
+                name="btnConfirmar"
+                value="Cadastrar"
+                id="btnConfirmarConfirmacao"
+                class="btn btn-outline-dark" />
+                </button>
+                <input
+                  type="submit"
+                  name="btnRetornarCadastro"
+                  value="Retornar"
+                  id="btnRetornarCadastro"
+                  class="btn btn-outline-dark" />
+              </div>
+        </div>
+      </form>
       <!-- sessão adicionar -->
       <!-- nesta sessão, irá aparecer uma caixa que possibilitará a inserção e edição de tombamentos -->
       <!-- se update for true, então a caixa já mudará para ativo. -->
@@ -377,8 +386,10 @@ if (isset($_POST[''])) {
       }
 
       const retornarBtn = document.getElementById('retornar');
+      const btnRetornarCadastro = document.getElementById('btnRetornarCadastro');
       const editarBtns = document.querySelectorAll('.editarBtns');
 
+      btnRetornarCadastro.addEventListener('click', abrirFecharTelaConfirmacao);
       retornarBtn.addEventListener('click', abrirFecharCadastrar);
       // querySelectorAll pega todos os elementos e guarda na nodelist (no navegador), forEach itera sobre, onde irá retornar uma arrow function chamada btn que, para cada btn que encontrar, abrirá/fechará a tela de cadastro.
       editarBtns.forEach(btn => {
