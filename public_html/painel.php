@@ -58,15 +58,25 @@ if (isset($_POST['atualizar'])) {
   header("Location: painel.php");
 }
 
+if (isset($_REQUEST['remover'])) {
+  $indice = $_REQUEST['remover'];
+  $query = "DELETE FROM tombamentos WHERE indice=$indice";
+
+  if ($conexao->query($query) === TRUE) {
+    echo "Deletado com sucesso!";
+  } else {
+    echo "Erro em deletar tombamento: " . $conexao->error;
+  }
+  header("Location: painel.php");
+  $conexao->close();
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (isset($_POST['retornar'])) {
     // po nao faço ideia do pq rola isso mas era pra ter um header painel.php aqui pra limpar a url, mas aparentemente já faz isso msm sem header, apenas com submit, vou deixar aqui pq foi bem engraçado.
   }
 }
 
-if (isset($_POST[''])) {
-
-}
 ?>
 
 <!DOCTYPE html>
@@ -146,11 +156,13 @@ if (isset($_POST[''])) {
             } elseif ($prioridade === 'maxima') {
               $classPrioridade = 'spinner-grow spinner-grow-sm text-danger';
             }
+
             echo "<td>
                     <div class=\"$classPrioridade\" role=\"status\" >
                       <span class=\"visually-hidden\">Loading...</span>
                     </div>
                   </td>";
+
             if ($status === 'finalizado') {
               $textoStatus = "| Finalizado";
               $classStatus = 'spinner-grow spinner-grow-sm text-success pararAnimacao';
@@ -167,8 +179,10 @@ if (isset($_POST[''])) {
               $textoStatus = "| Aguardando Entrega";
               $classStatus = 'spinner-grow spinner-grow-sm text-warning';
             }
+
             // aqui ele vai receber dependendo da lógica, a classe de classStatus, e no style a gente altera a velocidade da bolinha.
             // a classe **pararAnimacao**, para a animação do bootstrap e mantém o transform em scale(1), mostrando todo seu tamanho.
+
             echo "<td style='text-align: left;'>
                     <div class=\"$classStatus\" role=\"status\" >
                         <span class=\"visually-hidden\">Loading...</span>
@@ -211,27 +225,27 @@ if (isset($_POST[''])) {
         </div>
       </div>
       <!-- sessão deletar -->
-      <form action="">
+       <!-- posso futuramente colocar uma UI pra confirmar a exclusão, mas no momento não é prioridade -->
         <div id="janelaConfirmacao" class="janelaConfirmacao">
               <h1>Tem certeza?</h1>
-              <p>Quer mesmo remover o tombamento X?</p> <!-- X será o tombamento_id --> 
+              <p>Quer mesmo remover o tombamento ?</p>
               <div class="btnsConfirmacao">
-              <input
-                type="submit"
-                name="btnConfirmar"
-                value="Cadastrar"
-                id="btnConfirmarConfirmacao"
-                class="btn btn-outline-dark" />
-                </button>
                 <input
                   type="submit"
-                  name="btnRetornarCadastro"
+                  name="btnConfirmar"
+                  value="Deletar"
+                  id="btnConfirmarConfirmacao"
+                  class="btn btn-outline-dark" />
+                  <input type="hidden" name="remover" value="<?php echo $remover; ?>">
+                <input
+                  type="submit"
+                  name="btnRetornar"
                   value="Retornar"
                   id="btnRetornarCadastro"
                   class="btn btn-outline-dark" />
               </div>
         </div>
-      </form>
+
       <!-- sessão adicionar -->
       <!-- nesta sessão, irá aparecer uma caixa que possibilitará a inserção e edição de tombamentos -->
       <!-- se update for true, então a caixa já mudará para ativo. -->
