@@ -1,4 +1,23 @@
-<?php
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/style.php">
+  <title>tombamentos | cadastro</title>
+  <!-- icone logo -->
+  <link rel="shortcut icon" href="assets/icons/favicon.png" type="image/x-icon">
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+  <!-- sessão de login -->
+  <section class="cadastrar-section bg-dark">
+    <div class="cadastrar-box">
+    <?php
 include "../config/conexao.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -45,7 +64,7 @@ function entrar($username, $senha) {
 
         header("Location: painel.php");
     } else {
-        echo "Erro ao logar, id do técnico ou senha incorretos.";
+        echo "<p style='font-size: 1rem'>Erro ao logar, id do técnico ou senha incorretos.</p>";
     }
 }
 
@@ -59,36 +78,15 @@ function cadastrar($username, $senha, $email) {
     $sql = "INSERT INTO tecnicos (nome, email, senha) VALUES ('$username', '$email', '$senha')";
 
     if ($conexao->query($sql) === TRUE) {
-        echo "Debug: Usuário adicionado, id: " . $conexao->insert_id . ".";
+        echo "<p style='font-size: 1rem'>Usuário adicionado, id: " . $conexao->insert_id . ".</p>";
     } else {
-        echo "Erro: " . $conexao->error;
+        echo "<p style='font-size: 1rem'>Erro: </p>" . $conexao->error;
     }
 
     $conexao->close();
 }
 
 ?>
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="assets/css/style.php">
-  <title>tombamentos | cadastro</title>
-  <!-- icone logo -->
-  <link rel="shortcut icon" href="assets/icons/favicon.png" type="image/x-icon">
-  <link rel="preconnect" href="https://rsms.me/">
-  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
-
-<body>
-  <!-- sessão de login -->
-  <section class="cadastrar-section bg-dark">
-    <div class="cadastrar-box">
-        <p style="font-size: 1rem">Cadastro realizado com sucesso!</p>
         <button onclick="location.href = 'index.php';" class="btn btn-outline-dark" type="button" name="retornar" value="retornar">retornar</button>
     </div>
   </section>
