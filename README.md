@@ -13,6 +13,7 @@ Este é um projeto desenvolvido em PHP que oferece funcionalidades para gerencia
 - PHP
 - MySQL
 - HTML/CSS
+- Choices.js
 
 ## Contribuição
 
