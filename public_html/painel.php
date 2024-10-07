@@ -1,6 +1,7 @@
 <?php
 include 'protecao.php';
 include '../config/conexao.php';
+
 $update = false;
 
 // lógica para pegar dados do formulário cadastro tombamentos e inserir no mysql
@@ -51,7 +52,7 @@ if (isset($_POST['atualizar'])) {
   $descricao = $_POST['descricao'];
   $status = $_POST['status'];
 
-  $query = "UPDATE tombamentos SET tombamento_id='$tombamento_id', secretaria='$secretaria', tecnico='$tecnico', entrada='$entrada', prioridade='$prioridade', descricao='$descricao', status='$status' WHERE indice='$indice'";
+  $query = "UPDATE tombamentos SET tombamento_id='$tombamento_id', secretaria='$secretaria', tecnico= '$tecnico', entrada='$entrada', prioridade='$prioridade', descricao='$descricao', status='$status' WHERE indice='$indice'";
 
   $resultado = mysqli_query($conexao, $query) or die(mysqli_error($conexao));
 
@@ -67,6 +68,7 @@ if (isset($_REQUEST['remover'])) {
   } else {
     echo "Erro em deletar tombamento: " . $conexao->error;
   }
+
   header("Location: painel.php");
   $conexao->close();
 }
@@ -77,6 +79,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 }
 
+if (isset($_REQUEST['finalizar'])) {
+  $indice = $_REQUEST['finalizar'];
+
+  $sql = "SELECT saida FROM tombamentos WHERE indice=$indice";
+  $resultadoSaida = mysqli_query($conexao, $sql);
+
+  if (mysqli_num_rows($resultadoSaida) > 0) {
+    ini_set('date.timezone', 'America/Cuiaba');
+    date_default_timezone_set('America/Cuiaba');
+    
+    $linha = mysqli_fetch_assoc($resultadoSaida);
+    $saida = $linha["saida"];
+    
+    $dataHoraAtual = date('d-m-y h:i:s');
+
+    $sql = "UPDATE tombamentos SET saida='$dataHoraAtual' WHERE indice=$indice";
+
+    $mudaSaida = mysqli_query($conexao, $sql) or die (mysqli_error($conexao));
+
+    var_dump($dataHoraAtual);
+    var_dump($saida);
+  } else { 
+    echo "0 resultados";
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -148,7 +175,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "<td>" . strtoupper($tombamentosDados['secretaria']) . "</td>";
             echo "<td>" . ucfirst($tombamentosDados['tecnico']) . "</td>";
             echo "<td>" . $tombamentosDados['entrada'] . "</td>";
-            echo "<td>" . $tombamentosDados['saida'] . "</td>";
+            echo "<td id='dataHoraSaida'>" . $tombamentosDados['saida'] . "</td>";
+
             if ($prioridade === 'minima') {
               $classPrioridade = 'spinner-grow spinner-grow-sm text-success pararAnimacao';
             } elseif ($prioridade === 'moderada') {
@@ -197,9 +225,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   <img class="icon" src="assets/icons/edit.svg" alt="editar" />
                 </a>
               </div>
+
               <div class="remover">
                 <a class="removerBtns" href="painel.php?remover='. $tombamentosDados['indice'] .'">
                   <img class="icon" src="assets/icons/remove.svg" alt="remover" />
+                </a>
+              </div>
+
+              <div class="finalizar">
+                <a id="finalizar" class="finalizarBtns" href="painel.php?finalizar='. $tombamentosDados['indice'] .'">
+                  <img class="icon" src="assets/icons/finalizar.svg" alt="finalizar" /> 
                 </a>
               </div>
             </div>
@@ -225,7 +260,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
       </div>
       <!-- sessão deletar -->
-       <!-- posso futuramente colocar uma HUD pra confirmar a exclusão, mas no momento não é prioridade -->
+      <!-- posso futuramente colocar uma HUD pra confirmar a exclusão, mas no momento não é prioridade -->
         <div id="janelaConfirmacao" class="janelaConfirmacao">
               <h1>Tem certeza?</h1>
               <p>Quer mesmo remover o tombamento ?</p>
@@ -335,6 +370,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <!-- crud tombamentos -->
   <script>
     var dataHora = document.querySelector(".dataHora");
+    var dataHoraSaida = document.getElementById('dataHoraSaida');
+  
+
     const prioridade = document.getElementById('prioridade'); // Choices.js
     const prioridadeChoices = new Choices(prioridade, {
       removeItemButton: true,
@@ -383,7 +421,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     window.addEventListener('DOMContentLoaded', function() {
       const removerBtns = document.querySelectorAll('.removerBtns');
       const cadastrarBtn = document.getElementById('cadastrar');
-
+      
+      // pega data e hora atual quando user clicar em atualizar
+      
       if (window.location.href.indexOf("painel.php?indice=") > -1) {
         if (cadastrarBtn) {
           cadastrarBtn.addEventListener('click', abrirFecharCadastrar);
