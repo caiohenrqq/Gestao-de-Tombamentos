@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if (isset($_REQUEST['finalizar'])) {
   $indice = $_REQUEST['finalizar'];
 
-  $sql = "SELECT saida FROM tombamentos WHERE indice=$indice";
+  $sql = "SELECT saida, status FROM tombamentos WHERE indice=$indice";
   $resultadoSaida = mysqli_query($conexao, $sql);
 
   if (mysqli_num_rows($resultadoSaida) > 0) {
@@ -95,14 +95,19 @@ if (isset($_REQUEST['finalizar'])) {
     $dataHoraAtual = date('y-m-d h:i:s');
 
     $sql = "UPDATE tombamentos SET saida='$dataHoraAtual' WHERE indice=$indice";
-    
+
     $mudaSaida = mysqli_query($conexao, $sql) or die (mysqli_error($conexao));
 
+    if ($linha["status"] !== "0000-00-00 00:00:00") {
+      $sql = "UPDATE status SET status='finalizado' WHERE indice=$indice";
+    }
+    
     header("Location: painel.php");
   } else { 
     echo "0 resultados";
   }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -174,7 +179,12 @@ if (isset($_REQUEST['finalizar'])) {
             echo "<td>" . strtoupper($tombamentosDados['secretaria']) . "</td>";
             echo "<td>" . ucfirst($tombamentosDados['tecnico']) . "</td>";
             echo "<td>" . $tombamentosDados['entrada'] . "</td>";
+
             echo "<td id='dataHoraSaida'>" . $tombamentosDados['saida'] . "</td>";
+
+            if ($tombamentosDados['saida'] !== "0000-00-00 00:00:00") {
+              $status = 'finalizado';
+            }
 
             if ($prioridade === 'minima') {
               $classPrioridade = 'spinner-grow spinner-grow-sm text-success pararAnimacao';
@@ -206,6 +216,8 @@ if (isset($_REQUEST['finalizar'])) {
               $textoStatus = "| Aguardando Entrega";
               $classStatus = 'spinner-grow spinner-grow-sm text-warning';
             }
+
+
 
             // aqui ele vai receber dependendo da lógica, a classe de classStatus, e no style a gente altera a velocidade da bolinha.
             // a classe **pararAnimacao**, para a animação do bootstrap e mantém o transform em scale(1), mostrando todo seu tamanho.
