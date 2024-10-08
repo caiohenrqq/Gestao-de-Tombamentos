@@ -97,15 +97,20 @@ if (isset($_REQUEST['finalizar'])) {
     $sql = "UPDATE tombamentos SET saida='$dataHoraAtual' WHERE indice=$indice";
 
     $mudaSaida = mysqli_query($conexao, $sql) or die (mysqli_error($conexao));
+    
 
     if ($linha["status"] !== "0000-00-00 00:00:00") {
-      $sql = "UPDATE status SET status='finalizado' WHERE indice=$indice";
+      $sql = "UPDATE tombamentos SET status='finalizado' WHERE indice=$indice";
+
+      $mudaStatus = mysqli_query($conexao, $sql) or die (mysqli_error($conexao));
     }
-    
+
     header("Location: painel.php");
+
   } else { 
     echo "0 resultados";
   }
+  
 }
 
 ?>
@@ -181,11 +186,6 @@ if (isset($_REQUEST['finalizar'])) {
             echo "<td>" . $tombamentosDados['entrada'] . "</td>";
 
             echo "<td id='dataHoraSaida'>" . $tombamentosDados['saida'] . "</td>";
-
-            if ($tombamentosDados['saida'] !== "0000-00-00 00:00:00") {
-              $status = 'finalizado';
-            }
-
             if ($prioridade === 'minima') {
               $classPrioridade = 'spinner-grow spinner-grow-sm text-success pararAnimacao';
             } elseif ($prioridade === 'moderada') {
