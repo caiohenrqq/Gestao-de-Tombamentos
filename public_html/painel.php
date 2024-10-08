@@ -92,14 +92,13 @@ if (isset($_REQUEST['finalizar'])) {
     $linha = mysqli_fetch_assoc($resultadoSaida);
     $saida = $linha["saida"];
     
-    $dataHoraAtual = date('d-m-y h:i:s');
+    $dataHoraAtual = date('y-m-d h:i:s');
 
     $sql = "UPDATE tombamentos SET saida='$dataHoraAtual' WHERE indice=$indice";
-
+    
     $mudaSaida = mysqli_query($conexao, $sql) or die (mysqli_error($conexao));
 
-    var_dump($dataHoraAtual);
-    var_dump($saida);
+    header("Location: painel.php");
   } else { 
     echo "0 resultados";
   }
@@ -169,7 +168,7 @@ if (isset($_REQUEST['finalizar'])) {
             $classStatus = '';
             $textoStatus = '';
             $corPrioridade = '';
-
+            
             echo "<tr>";
             echo "<th>" . $tombamentosDados['tombamento_id'] . "</th>";
             echo "<td>" . strtoupper($tombamentosDados['secretaria']) . "</td>";
@@ -228,6 +227,7 @@ if (isset($_REQUEST['finalizar'])) {
 
               <div class="remover">
                 <a class="removerBtns" href="painel.php?remover='. $tombamentosDados['indice'] .'">
+                <input type="hidden" name="indice" value="<?php echo $indice; ?>">
                   <img class="icon" src="assets/icons/remove.svg" alt="remover" />
                 </a>
               </div>
