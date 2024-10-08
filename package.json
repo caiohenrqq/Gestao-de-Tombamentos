@@ -11,5 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "choices.js": "^11.0.2"
+  },
+  "devDependencies": {
+    "@prettier/plugin-php": "^0.22.2",
+    "prettier": "^3.3.3"
   }
 }

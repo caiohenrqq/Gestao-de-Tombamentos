@@ -24,7 +24,7 @@ $resultadoTombamentos = $conexao->query($sqlExibir);
 // lógica para alterar dados dos tombamentos
 if (isset($_GET['indice'])) {
   $indice = $_GET['indice'];
-  
+
   $selecionarDados = mysqli_query($conexao, "SELECT * FROM tombamentos WHERE indice=$indice") or die(mysqli_error($conexao));
 
   $update = true;
@@ -88,31 +88,28 @@ if (isset($_REQUEST['finalizar'])) {
   if (mysqli_num_rows($resultadoSaida) > 0) {
     ini_set('date.timezone', 'America/Cuiaba');
     date_default_timezone_set('America/Cuiaba');
-    
+
     $linha = mysqli_fetch_assoc($resultadoSaida);
     $saida = $linha["saida"];
-    
+
     $dataHoraAtual = date('y-m-d h:i:s');
 
     $sql = "UPDATE tombamentos SET saida='$dataHoraAtual' WHERE indice=$indice";
 
-    $mudaSaida = mysqli_query($conexao, $sql) or die (mysqli_error($conexao));
-    
+    $mudaSaida = mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
+
 
     if ($linha["status"] !== "0000-00-00 00:00:00") {
       $sql = "UPDATE tombamentos SET status='finalizado' WHERE indice=$indice";
 
-      $mudaStatus = mysqli_query($conexao, $sql) or die (mysqli_error($conexao));
+      $mudaStatus = mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
     }
 
     header("Location: painel.php");
-
-  } else { 
+  } else {
     echo "0 resultados";
   }
-  
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -126,11 +123,8 @@ if (isset($_REQUEST['finalizar'])) {
   <link rel="shortcut icon" href="assets/icons/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="assets/css/style.php" />
   <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-    crossorigin="anonymous" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 </head>
@@ -178,7 +172,7 @@ if (isset($_REQUEST['finalizar'])) {
             $classStatus = '';
             $textoStatus = '';
             $corPrioridade = '';
-            
+
             echo "<tr>";
             echo "<th>" . $tombamentosDados['tombamento_id'] . "</th>";
             echo "<td>" . strtoupper($tombamentosDados['secretaria']) . "</td>";
@@ -238,14 +232,14 @@ if (isset($_REQUEST['finalizar'])) {
               </div>
 
               <div class="remover">
-                <a class="removerBtns" href="painel.php?remover='. $tombamentosDados['indice'] .'">
+                <a class="removerBtns" href="painel.php?remover=' . $tombamentosDados['indice'] . '">
                 <input type="hidden" name="indice" value="<?php echo $indice; ?>">
                   <img class="icon" src="assets/icons/remove.svg" alt="remover" />
                 </a>
               </div>
 
               <div class="finalizar">
-                <a id="finalizar" class="finalizarBtns" href="painel.php?finalizar='. $tombamentosDados['indice'] .'">
+                <a id="finalizar" class="finalizarBtns" href="painel.php?finalizar=' . $tombamentosDados['indice'] . '">
                   <img class="icon" src="assets/icons/finalizar.svg" alt="finalizar" /> 
                 </a>
               </div>
@@ -273,25 +267,17 @@ if (isset($_REQUEST['finalizar'])) {
       </div>
       <!-- sessão deletar -->
       <!-- posso futuramente colocar uma HUD pra confirmar a exclusão, mas no momento não é prioridade -->
-        <div id="janelaConfirmacao" class="janelaConfirmacao">
-              <h1>Tem certeza?</h1>
-              <p>Quer mesmo remover o tombamento ?</p>
-              <div class="btnsConfirmacao">
-                <input
-                  type="submit"
-                  name="btnConfirmar"
-                  value="Deletar"
-                  id="btnConfirmarConfirmacao"
-                  class="btn btn-outline-dark" />
-                  <input type="hidden" name="remover" value="<?php echo $remover; ?>">
-                <input
-                  type="submit"
-                  name="btnRetornar"
-                  value="Retornar"
-                  id="btnRetornarCadastro"
-                  class="btn btn-outline-dark" />
-              </div>
+      <div id="janelaConfirmacao" class="janelaConfirmacao">
+        <h1>Tem certeza?</h1>
+        <p>Quer mesmo remover o tombamento ?</p>
+        <div class="btnsConfirmacao">
+          <input type="submit" name="btnConfirmar" value="Deletar" id="btnConfirmarConfirmacao"
+            class="btn btn-outline-dark" />
+          <input type="hidden" name="remover" value="<?php echo $remover; ?>">
+          <input type="submit" name="btnRetornar" value="Retornar" id="btnRetornarCadastro"
+            class="btn btn-outline-dark" />
         </div>
+      </div>
 
       <!-- sessão adicionar -->
       <!-- nesta sessão, irá aparecer uma caixa que possibilitará a inserção e edição de tombamentos -->
@@ -310,7 +296,8 @@ if (isset($_REQUEST['finalizar'])) {
         </div>
         <div class="campoEntrada">
           <label for="secretaria">Secretaria</label>
-          <input placeholder="SEMURFH, SEMAD..." type="text" id="secretaria" name="secretaria" value="<?php echo isset($indice) ? $secretaria : ''; ?>" />
+          <input placeholder="SEMURFH, SEMAD..." type="text" id="secretaria" name="secretaria"
+            value="<?php echo isset($indice) ? $secretaria : ''; ?>" />
         </div>
         <div class="campoEntrada">
           <label for="tecnico">Técnico</label>
@@ -318,35 +305,32 @@ if (isset($_REQUEST['finalizar'])) {
         </div>
         <div class="campoEntrada">
           <label for="dataHora">Entrada (DD-MM-AAAA)</label>
-          <input class="dataHora" type="datetime-local" id="dataHora" name="dataHora" value="<?php echo isset($indice) ? $dadosSQL['entrada'] : ''; ?>" />
+          <input class="dataHora" type="datetime-local" id="dataHora" name="dataHora"
+            value="<?php echo isset($indice) ? $dadosSQL['entrada'] : ''; ?>" />
         </div>
         <div class="campoEntrada">
           <label for="prioridade">Prioridade:</label>
           <select name="prioridade" id="prioridade">
-            <!-- explicação deu so de $dadosSQL['prioridade'] logo abaixo -->
-          <option value="minima" <?php echo (isset($indice) && $dadosSQL['prioridade'] === 'minima') ? 'selected' : ''; ?>>Miníma</option>
-          <option value="moderada" <?php echo (isset($indice) && $dadosSQL['prioridade']=== 'moderada') ? 'selected' : ''; ?>>Moderada</option>
-          <option value="maxima" <?php echo (isset($indice) && $dadosSQL['prioridade'] === 'maxima') ? 'selected' : ''; ?>>Máxima</option>
-      </select>
+            <!-- explicação de $dadosSQL['prioridade'] logo abaixo -->
+            <option value="minima" <?php echo (isset($indice) && $dadosSQL['prioridade'] === 'minima') ? 'selected' : ''; ?>>Miníma</option>
+            <option value="moderada" <?php echo (isset($indice) && $dadosSQL['prioridade'] === 'moderada') ? 'selected' : ''; ?>>Moderada</option>
+            <option value="maxima" <?php echo (isset($indice) && $dadosSQL['prioridade'] === 'maxima') ? 'selected' : ''; ?>>Máxima</option>
+          </select>
         </div>
         <div class="campoEntrada">
           <label for="descricao">Descrição</label>
-          <input placeholder="Computador Lenovo com problema no HD..." type="text" id="descricao" name="descricao" value="<?php echo isset($indice) ? $descricao : ''; ?>" />
+          <input placeholder="Computador Lenovo com problema no HD..." type="text" id="descricao" name="descricao"
+            value="<?php echo isset($indice) ? $descricao : ''; ?>" />
         </div>
         <div class="campoEntrada">
           <label for="status">Status</label>
           <select name="status" id="status">
-          <!-- nao sei pq krlhos simplesmente $status nao funciona, mas $dadosSQL['status'] funciona, entao seguimos o baile. mas caso eu va refatorar dps, provavelmente tem algo a ver com escopo da função que recebe os dados, pois eles estao vindo com sucesso do sql. -->
-            <option value="avaliando" 
-            <?php echo (isset($indice) && $dadosSQL['status'] === 'avaliando') ? 'selected' : ''; ?>>Avaliando</option>
-            <option value="estragado" 
-            <?php echo (isset($indice) && $dadosSQL['status'] === 'estragado') ? 'selected' : ''; ?>>Estragado</option>
-            <option value="consertando" 
-            <?php echo (isset($indice) && $dadosSQL['status'] === 'consertando') ? 'selected' : ''; ?>>Consertando</option>
-            <option value="aguardando_entrega" 
-            <?php echo (isset($indice) && $dadosSQL['status'] === 'aguardando_entrega') ? 'selected' : ''; ?>>Aguardando Entrega</option>
-            <option value="finalizado" 
-            <?php echo (isset($indice) && $dadosSQL['status'] === 'finalizado') ? 'selected' : ''; ?>>Finalizado</option>
+            <!-- nao sei pq krlhos simplesmente $status nao funciona, mas $dadosSQL['status'] funciona, entao seguimos o baile. mas caso eu va refatorar dps, provavelmente tem algo a ver com escopo da função que recebe os dados, pois eles estao vindo com sucesso do sql. -->
+            <option value="avaliando" <?php echo (isset($indice) && $dadosSQL['status'] === 'avaliando') ? 'selected' : ''; ?>>Avaliando</option>
+            <option value="estragado" <?php echo (isset($indice) && $dadosSQL['status'] === 'estragado') ? 'selected' : ''; ?>>Estragado</option>
+            <option value="consertando" <?php echo (isset($indice) && $dadosSQL['status'] === 'consertando') ? 'selected' : ''; ?>>Consertando</option>
+            <option value="aguardando_entrega" <?php echo (isset($indice) && $dadosSQL['status'] === 'aguardando_entrega') ? 'selected' : ''; ?>>Aguardando Entrega</option>
+            <option value="finalizado" <?php echo (isset($indice) && $dadosSQL['status'] === 'finalizado') ? 'selected' : ''; ?>>Finalizado</option>
           </select>
         </div>
 
@@ -356,20 +340,11 @@ if (isset($_REQUEST['finalizar'])) {
             <!-- quando da submit (clica no botao atualizar, pega o valor $indice que esta armzenado no php e armazena no value desse input escondido, e após, joga ele na lógica de atualizar (linha 44) -->
             <input type="hidden" name="indice" value="<?php echo $indice; ?>">
           <?php } else { ?>
-            <input
-              type="submit"
-              name="cadastrarTombamento"
-              value="Cadastrar"
-              id="cadastrar"
+            <input type="submit" name="cadastrarTombamento" value="Cadastrar" id="cadastrar"
               class="btn btn-outline-dark" />
           <?php } ?>
 
-          <input
-            type="submit"
-            name="retornar"
-            value="Retornar"
-            id="retornar"
-            class="btn btn-outline-dark" />
+          <input type="submit" name="retornar" value="Retornar" id="retornar" class="btn btn-outline-dark" />
         </div>
       </form>
     </div>
@@ -383,7 +358,7 @@ if (isset($_REQUEST['finalizar'])) {
   <script>
     var dataHora = document.querySelector(".dataHora");
     var dataHoraSaida = document.getElementById('dataHoraSaida');
-  
+
 
     const prioridade = document.getElementById('prioridade'); // Choices.js
     const prioridadeChoices = new Choices(prioridade, {
@@ -433,9 +408,9 @@ if (isset($_REQUEST['finalizar'])) {
     window.addEventListener('DOMContentLoaded', function() {
       const removerBtns = document.querySelectorAll('.removerBtns');
       const cadastrarBtn = document.getElementById('cadastrar');
-      
+
       // pega data e hora atual quando user clicar em atualizar
-      
+
       if (window.location.href.indexOf("painel.php?indice=") > -1) {
         if (cadastrarBtn) {
           cadastrarBtn.addEventListener('click', abrirFecharCadastrar);
@@ -444,7 +419,7 @@ if (isset($_REQUEST['finalizar'])) {
         dataHora.value = dataHoraAtual();
         cadastrarBtn.addEventListener('click', abrirFecharCadastrar);
       }
-      
+
       if (window.location.href.indexOf("painel.php?remover=") > -1) {
         abrirFecharTelaConfirmacao();
       } else {
