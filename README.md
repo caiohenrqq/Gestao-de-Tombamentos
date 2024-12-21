@@ -1,4 +1,4 @@
-# Sistema de Gestão de Tombamentos
+# Gestão de Tombamentos
 
 Este é um projeto desenvolvido em PHP que oferece funcionalidades para gerenciamento de tombamentos. O sistema inclui um módulo de autenticação com login e cadastro, permitindo que técnicos possam se cadastrar, autenticar e gerenciar os tombamentos de equipamentos de forma eficiente.
 
